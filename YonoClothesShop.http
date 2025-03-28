@@ -1,0 +1,6 @@
+@YonoClothesShop_HostAddress = http://localhost:5157
+
+GET {{YonoClothesShop_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
