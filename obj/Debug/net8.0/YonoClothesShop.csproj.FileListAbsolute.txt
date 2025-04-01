@@ -170,3 +170,5 @@ D:\.net\YonoClothesShop\obj\Debug\net8.0\YonoClothesShop.pdb
 D:\.net\YonoClothesShop\obj\Debug\net8.0\YonoClothesShop.genruntimeconfig.cache
 D:\.net\YonoClothesShop\obj\Debug\net8.0\ref\YonoClothesShop.dll
 D:\.net\YonoClothesShop\obj\Debug\net8.0\YonoClothesShop.sourcelink.json
+d:\.net\YonoClothesShop\bin\Debug\net8.0\BCrypt.Net-Next.dll
+d:\.net\YonoClothesShop\bin\Debug\net8.0\YonoClothesShop.staticwebassets.runtime.json
