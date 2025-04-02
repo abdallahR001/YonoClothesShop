@@ -21,7 +21,6 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IbaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddCors(options =>
 {

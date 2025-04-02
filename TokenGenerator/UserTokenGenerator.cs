@@ -9,15 +9,14 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace YonoClothesShop.TokenGenerator
 {
-    public class UserTokenGenerator
+    public static class UserTokenGenerator
     {
-        public string GenerateToken(int userId, string email, string name, string address, IConfiguration configuration)
+        public static string GenerateToken(int userId, string email,IConfiguration configuration)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.Name, name),
                 new Claim(ClaimTypes.Role, "user"),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
@@ -35,7 +34,7 @@ namespace YonoClothesShop.TokenGenerator
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-        public string GenerateRefreshToken()
+        public static string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
             using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())

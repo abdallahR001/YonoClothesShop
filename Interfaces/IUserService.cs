@@ -11,6 +11,7 @@ namespace YonoClothesShop.Interfaces
     public interface IUserService
     {
         public Task<bool> CreateAccount(string name, string email, string password, string address, IFormFile profileImage);
+        public Task<Token> Login(string email, string password);
         public Task<UserDTO> GetAccount(int id);
         public Task<bool> UpdateAccount(string name = null, string email = null, string password = null, string address = null, IFormFile profileImage = null);
         public Task<bool> DeleteAccount(int id);

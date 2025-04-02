@@ -1,18 +1,6 @@
 {
   "Files": [
     {
-      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\1238c857-90b1-48e0-bbcf-a178b7f61f04.jpg",
-      "PackagePath": "staticwebassets\\images\\1238c857-90b1-48e0-bbcf-a178b7f61f04.jpg"
-    },
-    {
-      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\20b63fe2-446a-4e3b-98c6-115c0aa5e708.jpg",
-      "PackagePath": "staticwebassets\\images\\20b63fe2-446a-4e3b-98c6-115c0aa5e708.jpg"
-    },
-    {
-      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\2403434b-455f-469e-b57e-b1e340c18fc2.jpg",
-      "PackagePath": "staticwebassets\\images\\2403434b-455f-469e-b57e-b1e340c18fc2.jpg"
-    },
-    {
       "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\3a75db77-c538-4e64-ba45-00b52c9aebe2.jpg",
       "PackagePath": "staticwebassets\\images\\3a75db77-c538-4e64-ba45-00b52c9aebe2.jpg"
     },
@@ -21,16 +9,12 @@
       "PackagePath": "staticwebassets\\images\\5abe4804-9bb3-4018-a76e-22bde9f5ea2f.png"
     },
     {
-      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\5e636057-44a7-4e64-a29c-498385ae53a9.jpg",
-      "PackagePath": "staticwebassets\\images\\5e636057-44a7-4e64-a29c-498385ae53a9.jpg"
+      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\efbe5035-e157-42b3-a969-00b4499dd8cc.png",
+      "PackagePath": "staticwebassets\\images\\efbe5035-e157-42b3-a969-00b4499dd8cc.png"
     },
     {
-      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\63b7eba6-6d3a-4277-8666-d65b3cc7e4c3.jpg",
-      "PackagePath": "staticwebassets\\images\\63b7eba6-6d3a-4277-8666-d65b3cc7e4c3.jpg"
-    },
-    {
-      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\cc2fb580-c5f7-4afb-9861-0e788106b948.jpg",
-      "PackagePath": "staticwebassets\\images\\cc2fb580-c5f7-4afb-9861-0e788106b948.jpg"
+      "Id": "d:\\.net\\YonoClothesShop\\wwwroot\\images\\fa88bbbc-c40f-4364-b57e-e7ccd4d86693.jpg",
+      "PackagePath": "staticwebassets\\images\\fa88bbbc-c40f-4364-b57e-e7ccd4d86693.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.YonoClothesShop.Microsoft.AspNetCore.StaticWebAssets.props",

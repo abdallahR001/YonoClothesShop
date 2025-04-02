@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
+using YonoClothesShop.Models.RequestModels;
+using YonoClothesShop.TokenGenerator;
 using YonoClothesShop.UnitOfWork;
 
 namespace YonoClothesShop.Services
@@ -12,10 +15,12 @@ namespace YonoClothesShop.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration;
 
-        public UserService(IUnitOfWork unitOfWork)
+        public UserService(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
         public Task<bool> AddProductToCart(int productId, int quantity)
         {
@@ -42,7 +47,7 @@ namespace YonoClothesShop.Services
             if(string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(address) || profileImage == null)
                 return false;
             var userExists = await _unitOfWork.UsersRepository.GetByEmail(email);
-            if(userExists)
+            if(userExists != null)
                 return false;
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
             if (!Directory.Exists(folderPath))
@@ -53,7 +58,7 @@ namespace YonoClothesShop.Services
             var filePath = Path.Combine(folderPath, fileName);
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                profileImage.CopyTo(stream);
+                await profileImage.CopyToAsync(stream);
             }
             var imagePath = Path.Combine("images", fileName);
             
@@ -78,6 +83,30 @@ namespace YonoClothesShop.Services
         public Task<UserDTO> GetAccount(int id)
         {
             throw new NotImplementedException();
+        }
+        public async Task<Token> Login(string email, string password)
+        {
+            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                return null;
+            var user = await _unitOfWork.UsersRepository.GetByEmail(email);
+            if(user == null)
+                return null;
+            var isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password,user.PasswordHash);
+            if(!isPasswordCorrect)
+                return null;
+            var accessToken = UserTokenGenerator.GenerateToken(user.Id,email,_configuration);
+            var refreshToken = UserTokenGenerator.GenerateRefreshToken();
+            var authResponse = new Token
+            {
+                UserId = user.Id,
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+                AccessTokenExpiration = DateTime.UtcNow
+                .AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationInMinutes"]))
+            };
+            _unitOfWork.TokenRepository.Add(authResponse);
+            await _unitOfWork.SaveChangesAsync();
+            return authResponse;
         }
 
         public Task<bool> RemoveProductFromCart(int productId)

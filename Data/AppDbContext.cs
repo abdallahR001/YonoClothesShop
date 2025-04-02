@@ -20,7 +20,8 @@ namespace YonoClothesShop.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Inventory> InventoryProducts { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        
+        public DbSet<Token> Tokens { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public AppDbContext(DbContextOptions options):base(options)
         {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)

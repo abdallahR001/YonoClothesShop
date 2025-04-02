@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YonoClothesShop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6feb72345747f85a9e531ac22de2d9eec4220322")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce6b7d4198eb58286037c881fd1b8aec2c60e909")]
 [assembly: System.Reflection.AssemblyProductAttribute("YonoClothesShop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YonoClothesShop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
