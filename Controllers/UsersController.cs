@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using YonoClothesShop.Interfaces;
@@ -38,6 +40,21 @@ namespace YonoClothesShop.Controllers
             if(token == null)
                 return BadRequest(new {message = "invalid credentials"});
             return Ok(token);
+        }
+        [HttpGet("logout"),Authorize]
+        public async Task<ActionResult> LogOut()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Unauthorized();
+            
+            var isLoggedOut = await _userService.LogOut(id);
+
+            if(isLoggedOut)
+                return Ok(new {message = "logged out successfully"});
+
+            return NotFound(new {message = "user or token not found"});
         }
 }
 }
