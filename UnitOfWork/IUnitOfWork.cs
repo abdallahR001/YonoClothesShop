@@ -10,7 +10,8 @@ namespace YonoClothesShop.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         UserRepository UsersRepository { get; }
-        AccessTokenRepository TokenRepository { get; }
+        ProductRepository ProductsRepository { get; }
+        AccessTokenRepository TokensRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }
