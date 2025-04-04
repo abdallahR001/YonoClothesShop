@@ -7,7 +7,7 @@ this project is a Ecommerce clothes website management system wich supposed to b
 users can:
 
 -create new account
--view their account informations
+-view their account information
 -update their account
 -delete their account
 -view all products

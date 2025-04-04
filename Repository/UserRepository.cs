@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Net.Http.Headers;
 using YonoClothesShop.Data;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Repository
@@ -29,12 +30,12 @@ namespace YonoClothesShop.Repository
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetByFilter(Expression<Func<User, bool>> filter)
+        public async Task<List<User>> GetByFilter(Expression<Func<User, bool>> filter)
         {
             return await _dbContext.Users.Where(filter).ToListAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<List<User>> GetAll()
         {
             return await _dbContext.Users.ToListAsync();
         }
@@ -73,5 +74,6 @@ namespace YonoClothesShop.Repository
                 _dbContext.Users.Remove(user);
             }
         }
+
     }
 }

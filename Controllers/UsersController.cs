@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 using YonoClothesShop.Models.RequestModels;
@@ -55,6 +56,21 @@ namespace YonoClothesShop.Controllers
                 return Ok(new {message = "logged out successfully"});
 
             return NotFound(new {message = "user or token not found"});
+        }
+        [HttpGet("profile"),Authorize]
+        public async Task<ActionResult<UserDTO>> GetProfile()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var user = await _userService.GetAccount(id);
+
+            if(user == null)
+                return NotFound(new {message = "user not found"});
+            
+            return Ok(user);
         }
 }
 }

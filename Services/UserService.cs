@@ -80,9 +80,21 @@ namespace YonoClothesShop.Services
             throw new NotImplementedException();
         }
 
-        public Task<UserDTO> GetAccount(int id)
+        public async Task<UserDTO> GetAccount(int id)
         {
-            throw new NotImplementedException();
+            var user = await _unitOfWork.UsersRepository.GetById(id);
+
+            if(user == null)
+                return null;
+            
+            return new UserDTO
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Amount = user.Amount,
+                OrdersCount = user.OrdersCount,
+                ProfileImage = user.ProfileImage
+            };
         }
         public async Task<Token> Login(string email, string password)
         {
