@@ -15,7 +15,7 @@ namespace YonoClothesShop.Interfaces
         public Task<List<ProductDTO>> GetProductsByCategory(string categoryName);
         public Task<List<ProductDTO>> GetProductsByName(string Name);
         public Task<List<ProductDTO>> GetProductsFiltredByPrice(int minPrice, int? maxPrice = null);
-        public Task<List<ProductDTO>> GetProductsByRating(Expression<Func<int,bool>> filter);
-        public Task<List<ProductDTO>> GetProductsByPriceAndRating(Expression<Func<int,int,bool>> filter);
+        public Task<int> AddProduct(string name, string description, IFormFile image, int price, int count, int categoryId);
+        public Task<int> UpdateProduct(int id, string name, string description, IFormFile image, int price, int count);
     }
 }

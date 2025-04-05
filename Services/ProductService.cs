@@ -19,6 +19,41 @@ namespace YonoClothesShop.Services
         {
             _unitOfWork = unitOfWork;
         }
+
+        public async Task<int> AddProduct(string name, string description, IFormFile image, int price, int count, int categoryId)
+        {
+            if(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || image.Length == 0 || image == null || price <= 0 || count < 0 || categoryId <= 0)
+                return -2;
+
+            var product = new Product
+            {
+                Name = name,
+                Description = description,
+                Price = price,
+                Count = count,
+                CategoryId = categoryId
+            };
+            var isAdded = await _unitOfWork.ProductsRepository.Add(product);
+
+            if(!isAdded)
+                return -1;
+
+            var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
+
+            var imagePath = Path.Combine("wwwroot/images", fileName);
+
+            using (var stream = new FileStream(imagePath, FileMode.Create))
+            {
+                await image.CopyToAsync(stream);
+            }
+
+            product.Image = fileName;
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return product.Id;
+        }
+
         public async Task<Product> GetProduct(int id)
         {
             var product = await _unitOfWork.ProductsRepository.GetById(id);
@@ -93,14 +128,47 @@ namespace YonoClothesShop.Services
             ).ToList();
         }
 
-        public Task<List<ProductDTO>> GetProductsByPriceAndRating(Expression<Func<int, int, bool>> filter)
+        public async Task<int> UpdateProduct(int id,string? name, string? description, IFormFile? image, int price, int count)
         {
-            throw new NotImplementedException();
-        }
+            var product = await _unitOfWork.ProductsRepository.GetById(id);
 
-        public Task<List<ProductDTO>> GetProductsByRating(Expression<Func<int, bool>> filter)
-        {
-            throw new NotImplementedException();
+            if(product == null)
+                return -1;
+
+            if(!string.IsNullOrWhiteSpace(name))
+                product.Name = name;
+
+            if(!string.IsNullOrWhiteSpace(description))
+                product.Description = description;
+
+            if(image != null && image.Length > 0)
+            {
+                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
+
+                var imagePath = Path.Combine("wwwroot/images", fileName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                product.Image = $"/images/{fileName}";
+            }
+
+            if(price > 0)
+                product.Price = price;
+
+            if(count >= 0)
+                product.Count = count;
+
+            var isUpdated = await _unitOfWork.ProductsRepository.Update(product.Id, product);
+
+            if(!isUpdated)
+                return -1;
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return product.Id;
         }
     }
 }

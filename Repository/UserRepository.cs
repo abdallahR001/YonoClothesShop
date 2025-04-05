@@ -48,22 +48,24 @@ namespace YonoClothesShop.Repository
             return user;
         }
 
-        public async Task Add(User entity)
+        public async Task<bool> Add(User entity)
         {
-            await _dbContext.Users.AddAsync(entity);;
+            await _dbContext.Users.AddAsync(entity);
+
+            return true;
         }
 
-        public async Task<User> Update(int id,User User)
+        public async Task<bool> Update(int id,User User)
         {
             var user = await _dbContext.Users.FindAsync(id);
             if(user == null)
-                return null;
+                return false;
             user.Name = User.Name;
             user.Email = User.Email;
             user.Address = User.Address;
             user.Name = User.Name;
             _dbContext.Users.Update(user);
-            return user;
+            return true;
         }
 
         public async Task Delete(int id)
