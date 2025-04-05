@@ -19,9 +19,18 @@ namespace YonoClothesShop.Repository
             _dbContext = dbContext;
             Products = _dbContext.Products;
         }
-        public async Task Add(Product product)
+        public async Task<bool> Add(Product product)
         {
-            await _dbContext.AddAsync(product);
+            var exsistingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Name == product.Name);
+
+            if(exsistingProduct == null)
+            {
+                await _dbContext.AddAsync(product);
+                return true;
+            }
+                
+            else
+                return false;
         }
 
         public async Task Delete(int id)
@@ -44,20 +53,29 @@ namespace YonoClothesShop.Repository
             return product;
         }
 
-        public async Task<Product> Update(int id, Product updatedProduct)
+        public async Task<bool> Update(int id, Product updatedProduct)
         {
             var product = await _dbContext.Products.FindAsync(id);
 
             if(product == null)
-                return null;
+                return false;
 
-            product.Name = updatedProduct.Name;
-            product.Description = updatedProduct.Description;
-            product.Image = updatedProduct.Image;
-            product.Price = updatedProduct.Price;
-            product.Count = updatedProduct.Count;
+            if(!string.IsNullOrWhiteSpace(updatedProduct.Name))
+                product.Name = updatedProduct.Name;
+
+            if(!string.IsNullOrWhiteSpace(updatedProduct.Description))
+                product.Description = updatedProduct.Description;
+
+            if(!string.IsNullOrWhiteSpace(updatedProduct.Image))
+                product.Image = updatedProduct.Image;
+
+            if(updatedProduct.Price > 0)
+                product.Price = updatedProduct.Price;
+
+            if(updatedProduct.Count >= 0)
+                product.Count = updatedProduct.Count;
             
-            return product;
+            return true;
         }
         public async Task<List<Product>> GetProductsByName(string name)
         {
@@ -79,7 +97,7 @@ namespace YonoClothesShop.Repository
                 return null;
 
             var products = await _dbContext.Products
-            .Where(p => p.category.Name == categoryName)
+            .Where(p => p.CategoryId == category.Id)
             .ToListAsync();
 
             return products;

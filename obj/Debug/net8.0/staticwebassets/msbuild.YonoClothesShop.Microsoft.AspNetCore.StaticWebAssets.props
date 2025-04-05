@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\3a75db77-c538-4e64-ba45-00b52c9aebe2.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5695d79b-fa8b-400d-93eb-a38cdbd4467f_adminsAndEmployees.png))">
       <SourceType>Package</SourceType>
       <SourceId>YonoClothesShop</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/YonoClothesShop</BasePath>
-      <RelativePath>images/3a75db77-c538-4e64-ba45-00b52c9aebe2.jpg</RelativePath>
+      <RelativePath>images/5695d79b-fa8b-400d-93eb-a38cdbd4467f_adminsAndEmployees.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -14,7 +14,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\3a75db77-c538-4e64-ba45-00b52c9aebe2.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5695d79b-fa8b-400d-93eb-a38cdbd4467f_adminsAndEmployees.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5abe4804-9bb3-4018-a76e-22bde9f5ea2f.png))">
       <SourceType>Package</SourceType>
@@ -32,6 +32,70 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5abe4804-9bb3-4018-a76e-22bde9f5ea2f.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\8a3d483a-8e6e-4e16-9813-4915507e0df8_code.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/8a3d483a-8e6e-4e16-9813-4915507e0df8_code.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\8a3d483a-8e6e-4e16-9813-4915507e0df8_code.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\915c38ac-e6a4-4802-9de2-674703be5e2f_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/915c38ac-e6a4-4802-9de2-674703be5e2f_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\915c38ac-e6a4-4802-9de2-674703be5e2f_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\af9f4f1d-848c-488f-832c-1977bc7b157c_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_0.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/af9f4f1d-848c-488f-832c-1977bc7b157c_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_0.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\af9f4f1d-848c-488f-832c-1977bc7b157c_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_0.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\b7df2e0f-9038-472b-8542-c413e5c69fdc_code.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/b7df2e0f-9038-472b-8542-c413e5c69fdc_code.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\b7df2e0f-9038-472b-8542-c413e5c69fdc_code.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ce077003-72bb-421a-bf2c-086e6b8f1063.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>YonoClothesShop</SourceId>
@@ -47,6 +111,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ce077003-72bb-421a-bf2c-086e6b8f1063.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\e6ea25cb-6a4a-4c01-820e-967bc5ca06f3_code.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/e6ea25cb-6a4a-4c01-820e-967bc5ca06f3_code.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\e6ea25cb-6a4a-4c01-820e-967bc5ca06f3_code.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\efbe5035-e157-42b3-a969-00b4499dd8cc.png))">
       <SourceType>Package</SourceType>

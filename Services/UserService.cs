@@ -112,7 +112,7 @@ namespace YonoClothesShop.Services
             var accessToken = UserTokenGenerator.GenerateToken(user.Id,email,_configuration);
             var refreshToken = UserTokenGenerator.GenerateRefreshToken();
 
-            var existingToken = await _unitOfWork.TokenRepository.Tokens
+            var existingToken = await _unitOfWork.TokensRepository.Tokens
             .FirstOrDefaultAsync(t => t.UserId == user.Id);
             if(existingToken != null)
             {
@@ -140,7 +140,7 @@ namespace YonoClothesShop.Services
                 RefreshTokenExpiration = DateTime.UtcNow.AddDays(5)
             };
 
-            _unitOfWork.TokenRepository.Add(authResponse);
+            await _unitOfWork.TokensRepository.Add(authResponse);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -154,13 +154,13 @@ namespace YonoClothesShop.Services
             if(user == null)
                 return false;
 
-            var token = await _unitOfWork.TokenRepository.Tokens
+            var token = await _unitOfWork.TokensRepository.Tokens
             .FirstOrDefaultAsync(t => t.UserId == user.Id);
 
             if(token == null || token.RefreshTokenExpiration < DateTime.UtcNow)
                 return false;
             
-            await _unitOfWork.TokenRepository.Delete(token.Id);
+            await _unitOfWork.TokensRepository.Delete(token.Id);
 
             await _unitOfWork.SaveChangesAsync();
 

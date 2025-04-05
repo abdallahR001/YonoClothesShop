@@ -18,9 +18,11 @@ namespace YonoClothesShop.Repository
             _dbContext = dbContext;
             Tokens = _dbContext.Tokens;
         }
-        public async Task Add(Token token)
+        public async Task<bool> Add(Token token)
         {
             await _dbContext.Tokens.AddAsync(token);
+            
+            return true;
         }
 
         public async Task Delete(int id)
@@ -36,14 +38,14 @@ namespace YonoClothesShop.Repository
             return token == null ? null : token;
         }
 
-        public async Task<Token> Update(int id, Token Token)
+        public async Task<bool> Update(int id, Token Token)
         {
             var token = await _dbContext.Tokens.FindAsync(id);
             if(token == null)
-                return null;
+                return false;
             token.AccessToken = token.AccessToken;
             _dbContext.Tokens.Update(token);
-            return token;
+            return true;
         }
     }
 }
