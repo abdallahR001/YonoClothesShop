@@ -54,6 +54,18 @@ namespace YonoClothesShop.Services
             return product.Id;
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            var productIsDeleted = await _unitOfWork.ProductsRepository.Delete(id);
+
+            if(!productIsDeleted)
+                return false;
+
+            await _unitOfWork.SaveChangesAsync();
+    
+            return true;
+        }
+
         public async Task<Product> GetProduct(int id)
         {
             var product = await _unitOfWork.ProductsRepository.GetById(id);
@@ -71,9 +83,9 @@ namespace YonoClothesShop.Services
             return products;
         }
 
-        public async Task<List<ProductDTO>> GetProductsByCategory(string categoryName)
+        public async Task<List<ProductDTO>> GetProductsByCategory(int id)
         {
-            var products = await _unitOfWork.ProductsRepository.GetProductsByCategory(categoryName);
+            var products = await _unitOfWork.ProductsRepository.GetProductsByCategory(id);
 
             if(products == null)
                 return null;
@@ -109,9 +121,9 @@ namespace YonoClothesShop.Services
             ).ToList();
         }
 
-        public async Task<List<ProductDTO>> GetProductsFiltredByPrice(int minPrice, int? maxPrice = null)
+        public async Task<List<ProductDTO>> GetProductsFiltredByPrice(int categoryId, int minPrice, int? maxPrice = null)
         {
-            var products = await _unitOfWork.ProductsRepository.GetProductsFiltredByPrice(minPrice,maxPrice);
+            var products = await _unitOfWork.ProductsRepository.GetProductsFiltredByPrice(categoryId,minPrice,maxPrice);
 
             if(!products.Any())
                 return null;

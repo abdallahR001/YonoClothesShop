@@ -17,7 +17,7 @@ namespace YonoClothesShop.Interfaces
         public Task<bool> UpdateAccount(string name = null, string email = null, string password = null, string address = null, IFormFile profileImage = null);
         public Task<bool> DeleteAccount(int id);
         public Task<ReviewDTO> AddReview(string review, int rating);
-        public Task<bool> AddProductToCart(int productId, int quantity);
+        public Task<bool> AddProductToCart(int userId,int productId, int quantity);
         public Task<bool> RemoveProductFromCart(int productId);
         public Task<Cart> ViewCart(int id);
         public Task<bool> ClearCart();

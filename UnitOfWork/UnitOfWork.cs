@@ -13,12 +13,19 @@ namespace YonoClothesShop.UnitOfWork
         public UserRepository UsersRepository { get; private set; }
         public ProductRepository ProductsRepository { get; private set;}
         public AccessTokenRepository TokensRepository { get; private set; }
+
+        public CartRepository CartsRepository { get; private set;}
+
+        public CartItemsRepository CartItemsRepository { get; private set;}
+
         private readonly AppDbContext _dbContext;
         public UnitOfWork(AppDbContext dbContext)
         {
             _dbContext = dbContext;
             UsersRepository = new UserRepository(_dbContext);
             ProductsRepository = new ProductRepository(_dbContext);
+            CartsRepository = new CartRepository(_dbContext);
+            CartItemsRepository = new CartItemsRepository(_dbContext);
             TokensRepository = new AccessTokenRepository(_dbContext);
         }
         

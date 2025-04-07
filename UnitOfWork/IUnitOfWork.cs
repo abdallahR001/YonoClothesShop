@@ -11,6 +11,8 @@ namespace YonoClothesShop.UnitOfWork
     {
         UserRepository UsersRepository { get; }
         ProductRepository ProductsRepository { get; }
+        CartRepository CartsRepository { get; }
+        CartItemsRepository CartItemsRepository { get; }
         AccessTokenRepository TokensRepository { get; }
         Task<int> SaveChangesAsync();
     }
