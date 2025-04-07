@@ -19,6 +19,16 @@ namespace YonoClothesShop.Controllers
         {
             _productService = productService;
         }
+        [HttpGet("")]
+        public async Task<actionResult<List<Product>>> GetAllProducts()
+        {
+            var products = await _productService.GetProducts();
+
+            if(products == null)
+                return null;
+            
+            return Ok(products);
+        }
         [HttpPost("add-product")]
         public async Task<ActionResult<int>> AddProduct(AddProductModel request)
         {
