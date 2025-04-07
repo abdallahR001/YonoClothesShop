@@ -12,6 +12,6 @@ namespace YonoClothesShop.Repository
         Task<T> GetById(int id);
         Task<bool> Add(T entity);
         Task<bool> Update(int id, T entity);
-        Task Delete(int id);
+        Task<bool> Delete(int id);
     }
 }

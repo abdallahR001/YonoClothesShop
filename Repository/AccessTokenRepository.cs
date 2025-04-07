@@ -25,11 +25,16 @@ namespace YonoClothesShop.Repository
             return true;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var token = await _dbContext.Tokens.FindAsync(id);
             if(token != null)
+            {
                 _dbContext.Remove(token);
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<Token> GetById(int id)

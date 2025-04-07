@@ -33,14 +33,17 @@ namespace YonoClothesShop.Repository
                 return false;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var product = await _dbContext.Products.FindAsync(id);
 
             if(product != null)
             {
                 _dbContext.Products.Remove(product);
+                return true;
             }
+            
+            return false;
         }
 
         public async Task<Product> GetById(int id)
@@ -102,12 +105,12 @@ namespace YonoClothesShop.Repository
 
             return products;
         }
-        public async Task<List<Product>> GetProductsFiltredByPrice(int minPrice, int? maxPrice = null)
+        public async Task<List<Product>> GetProductsFiltredByPrice(int categoryId,int minPrice, int? maxPrice = null)
         {
             if(minPrice <= 0)
                 return null;
 
-            var filtredProducts = Products.Where(p => p.Price >= minPrice);
+            var filtredProducts = Products.Where(p => p.CategoryId == categoryId && p.Price >= minPrice);
 
             if(maxPrice.HasValue && maxPrice > 0)
                 filtredProducts = filtredProducts.Where(p => p.Price <= maxPrice);

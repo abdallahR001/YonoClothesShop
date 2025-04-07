@@ -51,10 +51,10 @@ namespace YonoClothesShop.Controllers
             return Ok(products);
         }
         // TO DO: use the category id in the filter procces to get the products from that category
-        [HttpGet("filter/{minPrice}")]
-        public async Task<ActionResult<List<ProductDTO>>> GetProductsFilteredByPrice(int minPrice, int? maxPrice = null)
+        [HttpGet("{categoryId}/filter/{minPrice}")]
+        public async Task<ActionResult<List<ProductDTO>>> GetProductsFilteredByPrice(int categoryId, int minPrice, int? maxPrice = null)
         {
-            var products = await _productService.GetProductsFiltredByPrice(minPrice,maxPrice);
+            var products = await _productService.GetProductsFiltredByPrice(categoryId,minPrice,maxPrice);
 
             if(products == null)
                 return NotFound(new {message = "no products found"});
@@ -97,6 +97,16 @@ namespace YonoClothesShop.Controllers
                 return NotFound(new {message = "product not found"});
 
             return Ok(productId);
+        }
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            var isProductDeleted =  await _productService.Delete(id);
+
+            if(!isProductDeleted)
+                return NotFound(new {message = "product not found"});
+
+            return Ok(new {message = "product deleted succefully"});
         }
     }
 }

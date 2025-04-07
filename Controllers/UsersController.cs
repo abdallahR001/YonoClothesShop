@@ -72,5 +72,22 @@ namespace YonoClothesShop.Controllers
             
             return Ok(user);
         }
+        [HttpPost("add-to-cart/{productId}"),Authorize]
+        public async Task<ActionResult> AddToCart(int productId, AddProductToCartModel request)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(new {message = "bad data"});
+            
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if(!int.TryParse(userId,out int id))
+                return Forbid();
+            var isAddedToCart = await _userService.AddProductToCart(id,productId,request.Quantity);
+
+            if(!isAddedToCart)
+                return NotFound(new {message = "failed to add to cart because user or cart was not found"});
+
+            return Ok(new {message = "added successfully"});
+        }
 }
 }

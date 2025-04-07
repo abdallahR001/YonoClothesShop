@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
@@ -22,9 +23,74 @@ namespace YonoClothesShop.Services
             _unitOfWork = unitOfWork;
             _configuration = configuration;
         }
-        public Task<bool> AddProductToCart(int productId, int quantity)
+        public async Task<bool> AddProductToCart(int userId,int productId, int quantity)
         {
-            throw new NotImplementedException();
+            if(quantity <= 0)
+                return false;
+
+            var product = await _unitOfWork.ProductsRepository.GetById(productId);
+
+            if(product == null)
+                return false;
+
+            if(product.Count < quantity)
+                return false;
+
+            var user = await _unitOfWork.UsersRepository.GetById(userId);
+
+            if(user == null)
+                return false;
+
+            var exsistingCart = await _unitOfWork.CartsRepository.Carts
+            .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if(exsistingCart == null)
+            {
+                exsistingCart = new Cart
+                {
+                    UserId = user.Id,
+                    cartItems = new List<CartItem>()
+                };
+
+                await _unitOfWork.CartsRepository.Add(exsistingCart);
+            }
+
+            if(exsistingCart.cartItems == null)
+                exsistingCart.cartItems = new List<CartItem>();
+
+            var exsistingCartItem = await _unitOfWork.CartItemsRepository.CartItems
+            .FirstOrDefaultAsync(c => c.CartId == exsistingCart.Id && c.ProductId == productId);
+
+            if(exsistingCartItem != null)
+            {
+                exsistingCartItem.Quantity += quantity;
+            }
+            else
+            {
+                var cartItem = new CartItem
+                {
+                    ProductId = product.Id,
+                    CartId = exsistingCart.Id,
+                    Name = product.Name,
+                    Quantity = quantity,
+                    UnitPrice = product.Price,
+                    ProductImage = product.Image,
+                };
+            
+                
+                exsistingCart.cartItems.Add(cartItem);
+
+                exsistingCart.TotalPrice += exsistingCart.cartItems
+                .Sum(c => c.Quantity * c.UnitPrice);
+
+                await _unitOfWork.CartItemsRepository.Add(cartItem);
+            }
+
+            product.Count -= quantity;
+                
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
         }
 
         public Task<ReviewDTO> AddReview(string review, int rating)

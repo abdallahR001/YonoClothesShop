@@ -68,13 +68,15 @@ namespace YonoClothesShop.Repository
             return true;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var user = await GetById(id);
             if (user != null)
             {
                 _dbContext.Users.Remove(user);
+                return true;
             }
+            return false;
         }
 
     }
