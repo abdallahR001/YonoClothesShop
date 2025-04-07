@@ -71,9 +71,9 @@ namespace YonoClothesShop.Services
             return products;
         }
 
-        public async Task<List<ProductDTO>> GetProductsByCategory(string categoryName)
+        public async Task<List<ProductDTO>> GetProductsByCategory(int id)
         {
-            var products = await _unitOfWork.ProductsRepository.GetProductsByCategory(categoryName);
+            var products = await _unitOfWork.ProductsRepository.GetProductsByCategory(id);
 
             if(products == null)
                 return null;

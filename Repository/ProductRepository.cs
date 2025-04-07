@@ -88,10 +88,10 @@ namespace YonoClothesShop.Repository
             
             return products;
         }
-        public async Task<List<Product>> GetProductsByCategory(string categoryName)
+        public async Task<List<Product>> GetProductsByCategory(int id)
         {
             var category = await _dbContext.Categories
-            .FirstOrDefaultAsync(c => c.Name == categoryName);
+            .FindAsync(id);
 
             if(category == null)
                 return null;
