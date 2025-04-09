@@ -72,6 +72,21 @@ namespace YonoClothesShop.Controllers
             
             return Ok(user);
         }
+        [HttpPost("deposit"),Authorize]
+        public async Task<ActionResult> Deposit(DepositModel request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var result = await _userService.Deposit(id,request.Amount);
+
+            if(!result)
+                return BadRequest(new {message = "user not found or amount is less than or equal to 0"});
+
+            return Ok(new {messge = "amount added successfully"});
+        }
         [HttpPost("add-to-cart/{productId}"),Authorize]
         public async Task<ActionResult> AddToCart(int productId, AddProductToCartModel request)
         {

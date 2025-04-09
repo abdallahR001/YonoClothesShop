@@ -146,6 +146,24 @@ namespace YonoClothesShop.Services
             throw new NotImplementedException();
         }
 
+        public async Task<bool> Deposit(int id, int amount)
+        {
+
+            if(amount <= 0)
+                return false;
+
+            var user = await _unitOfWork.UsersRepository.GetById(id);
+
+            if(user == null)
+                return false;
+
+            user.Amount += amount;
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<UserDTO> GetAccount(int id)
         {
             var user = await _unitOfWork.UsersRepository.GetById(id);
