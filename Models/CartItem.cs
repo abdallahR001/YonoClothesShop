@@ -14,5 +14,6 @@ namespace YonoClothesShop.Models
         public int Quantity { get; set; }
         public int UnitPrice { get; set; }
         public string? ProductImage { get; set; }
+        public Cart? cart { get; set; }
     }
 }
