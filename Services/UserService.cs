@@ -98,9 +98,71 @@ namespace YonoClothesShop.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Checkout(int id)
+        public async Task<bool> Checkout(int id)
         {
-            throw new NotImplementedException();
+            var user = await _unitOfWork.UsersRepository.GetById(id);
+
+            if(user == null)
+                return false;
+
+            var cart = await _unitOfWork.CartsRepository.Carts
+            .FirstOrDefaultAsync(c => c.UserId == user.Id);
+
+            if(cart == null)
+                return false;
+
+            var cartItems = await _unitOfWork.CartItemsRepository.CartItems
+            .Where(c => c.CartId == cart.Id).ToListAsync();
+
+            if(!cartItems.Any())
+                return false;
+
+            var order = new Order
+            {
+                UserId = user.Id,
+                Address = user.Address,
+                CreatedAt = DateTime.UtcNow,
+                Status = "done",
+                PaymentMethod = "visa",
+                OrderItems = new List<OrderItem>(),
+            };
+
+            foreach(var item in cartItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    Name = item.Name,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
+                    ProductImage = item.ProductImage,
+                };
+
+                order.OrderItems.Add(orderItem);
+
+                order.ProductsCount++;
+            }
+
+            order.TotalPrice = order.OrderItems.Sum(o => o.UnitPrice * o.Quantity);
+
+            if(order.TotalPrice > user.Amount)
+                return false;
+            await _unitOfWork.OrdersRepository.Add(order);
+
+            user.Amount -= order.TotalPrice;
+
+            user.OrdersCount++;
+
+            foreach(var cartItem in cartItems)
+            {
+                await _unitOfWork.CartItemsRepository.Delete(cartItem.Id);
+            }
+
+            await _unitOfWork.CartsRepository.Delete(cart.Id);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
         }
 
         public Task<bool> ClearCart()
@@ -134,7 +196,7 @@ namespace YonoClothesShop.Services
                 Email = email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
                 Address = address,
-                ProfileImage = imagePath
+                ProfileImage = fileName
             };
             await _unitOfWork.UsersRepository.Add(user);
             await _unitOfWork.SaveChangesAsync();
