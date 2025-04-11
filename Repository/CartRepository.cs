@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.Data;
+using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Repository
 {
-    public class CartRepository : IbaseRepository<Cart>
+    public class CartRepository : ICartRepository
     {
         private readonly AppDbContext _dbContext;
-        public IQueryable<Cart> Carts;
+        public IQueryable<Cart> Carts { get; set; }
         public CartRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -50,11 +51,6 @@ namespace YonoClothesShop.Repository
                 return null;
 
             return cart;
-        }
-
-        public Task<bool> Update(int id, Cart entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

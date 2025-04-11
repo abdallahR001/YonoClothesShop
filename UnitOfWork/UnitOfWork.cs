@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YonoClothesShop.Data;
+using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 using YonoClothesShop.Repository;
 
@@ -10,18 +11,13 @@ namespace YonoClothesShop.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public UserRepository UsersRepository { get; private set; }
-        public ProductRepository ProductsRepository { get; private set; }
-        public AccessTokenRepository TokensRepository { get; private set; }
-
-        public CartRepository CartsRepository { get; private set; }
-
-        public CartItemsRepository CartItemsRepository { get; private set; }
-
-        public OrderRepository OrdersRepository { get; private set; }
-
-        public OrderItemRepository OrderItemsRepository { get; private set; }
-
+        public IUserRepository UsersRepository { get; private set; }
+        public IProductRepository ProductsRepository { get; private set; }
+        public ITokenRepository TokensRepository { get; private set; }
+        public ICartRepository CartsRepository { get; private set; }
+        public ICartItemRepository CartItemsRepository { get; private set; }
+        public IOrderRepository OrdersRepository { get; private set; }
+        public IOrderItemRepository OrderItemsRepository { get; private set; }
         private readonly AppDbContext _dbContext;
         public UnitOfWork(AppDbContext dbContext)
         {

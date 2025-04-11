@@ -6,14 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.Data;
 using YonoClothesShop.DTOs;
+using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Repository
 {
-    public class ProductRepository : IbaseRepository<Product>
+    public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext _dbContext;
-        public IQueryable<Product> Products;
+        public IQueryable<Product> Products { get; set; }
+
         public ProductRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;

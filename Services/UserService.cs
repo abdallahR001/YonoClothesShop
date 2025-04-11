@@ -153,13 +153,6 @@ namespace YonoClothesShop.Services
 
             user.OrdersCount++;
 
-            foreach(var cartItem in cartItems)
-            {
-                await _unitOfWork.CartItemsRepository.Delete(cartItem.Id);
-            }
-
-            await _unitOfWork.CartsRepository.Delete(cart.Id);
-
             await _unitOfWork.SaveChangesAsync();
 
             return true;

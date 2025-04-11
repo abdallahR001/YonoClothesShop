@@ -8,14 +8,15 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Net.Http.Headers;
 using YonoClothesShop.Data;
 using YonoClothesShop.DTOs;
+using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Repository
 {
-    public class UserRepository : IbaseRepository<User>
+    public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _dbContext;
-        public IQueryable<User> Users;
+        public IQueryable<User> Users { get; set; }
         public UserRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;

@@ -5,14 +5,15 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.Data;
+using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Repository
 {
-    public class AccessTokenRepository : IbaseRepository<Token>
+    public class AccessTokenRepository : ITokenRepository
     {
         private readonly AppDbContext _dbContext;
-        public IQueryable<Token> Tokens;
+        public IQueryable<Token> Tokens { get; set; }
         public AccessTokenRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -21,7 +22,7 @@ namespace YonoClothesShop.Repository
         public async Task<bool> Add(Token token)
         {
             await _dbContext.Tokens.AddAsync(token);
-            
+
             return true;
         }
 
@@ -31,26 +32,22 @@ namespace YonoClothesShop.Repository
             if(token != null)
             {
                 _dbContext.Remove(token);
+
                 return true;
             }
 
             return false;
         }
 
-        public async Task<Token> GetById(int id)
+        public Task<Token> Find(string token)
         {
-            var token = await _dbContext.Tokens.FindAsync(id);
-            return token == null ? null : token;
-        }
+            var Token = _dbContext.Tokens
+            .FirstOrDefaultAsync(t => t.AccessToken == token);
 
-        public async Task<bool> Update(int id, Token Token)
-        {
-            var token = await _dbContext.Tokens.FindAsync(id);
             if(token == null)
-                return false;
-            token.AccessToken = token.AccessToken;
-            _dbContext.Tokens.Update(token);
-            return true;
+                return null;
+
+            return Token;
         }
     }
 }

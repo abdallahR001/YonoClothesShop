@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YonoClothesShop.Data;
+using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Repository
 {
-    public class OrderRepository : IbaseRepository<Order>
+    public class OrderRepository : IOrderRepository
     {
         private readonly AppDbContext _dbContext;
-        public IQueryable<Order> Orders;
+        public IQueryable<Order> Orders { get; set; }
 
         public OrderRepository(AppDbContext dbContext)
         {
@@ -35,21 +36,6 @@ namespace YonoClothesShop.Repository
             _dbContext.Orders.Remove(order);
 
             return true;
-        }
-
-        public async Task<Order> GetById(int id)
-        {
-            var order = await _dbContext.Orders.FindAsync(id);
-
-            if(order == null)
-                return null;
-
-            return order;
-        }
-
-        public Task<bool> Update(int id, Order entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

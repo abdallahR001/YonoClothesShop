@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "A8r/0iOy/lnk+YzzuVrzyyMVgy781MgYJL1bVFSr4/Q=",
+  "Hash": "5fv/5SxTyxp526qDWpQL2ej8LwQIRlLlMNwu3PN74bM=",
   "Source": "YonoClothesShop",
   "BasePath": "_content/YonoClothesShop",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\325992f3-fc8a-4cb2-89de-79652ae392ec_sunset-mountain-beautiful-digital-art-scenery-4k-wallpaper-uhdpaper.com-183@1@n.jpg",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/325992f3-fc8a-4cb2-89de-79652ae392ec_sunset-mountain-beautiful-digital-art-scenery-4k-wallpaper-uhdpaper.com-183@1@n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\325992f3-fc8a-4cb2-89de-79652ae392ec_sunset-mountain-beautiful-digital-art-scenery-4k-wallpaper-uhdpaper.com-183@1@n.jpg"
+    },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\5695d79b-fa8b-400d-93eb-a38cdbd4467f_adminsAndEmployees.png",
       "SourceId": "YonoClothesShop",
