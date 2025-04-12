@@ -26,9 +26,9 @@ namespace YonoClothesShop.Repository
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> Delete(string refreshToken)
         {
-            var token = await _dbContext.Tokens.FindAsync(id);
+            var token = await _dbContext.Tokens.FirstOrDefaultAsync(t => t.RefreshToken == refreshToken);
             if(token != null)
             {
                 _dbContext.Remove(token);
@@ -42,7 +42,7 @@ namespace YonoClothesShop.Repository
         public Task<Token> Find(string token)
         {
             var Token = _dbContext.Tokens
-            .FirstOrDefaultAsync(t => t.AccessToken == token);
+            .FirstOrDefaultAsync(t => t.RefreshToken == token);
 
             if(token == null)
                 return null;

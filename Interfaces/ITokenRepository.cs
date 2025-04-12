@@ -10,7 +10,7 @@ namespace YonoClothesShop.Interfaces
     {
         public IQueryable<Token> Tokens { get; set; }
         public Task<bool> Add(Token token);
-        public Task<bool> Delete(int id);
+        public Task<bool> Delete(string refreshToken);
         public Task<Token> Find(string token);
     }
 }

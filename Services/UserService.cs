@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.RateLimiting;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
@@ -15,6 +16,7 @@ namespace YonoClothesShop.Services
 {
     public class UserService : IUserService
     {
+        // to do: remove cart items when you checkout
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
 
@@ -105,8 +107,7 @@ namespace YonoClothesShop.Services
             if(user == null)
                 return false;
 
-            var cart = await _unitOfWork.CartsRepository.Carts
-            .FirstOrDefaultAsync(c => c.UserId == user.Id);
+            var cart = await _unitOfWork.CartsRepository.GetCartWithCartItems(user.Id);
 
             if(cart == null)
                 return false;
@@ -299,11 +300,40 @@ namespace YonoClothesShop.Services
             if(token == null || token.RefreshTokenExpiration < DateTime.UtcNow)
                 return false;
             
-            await _unitOfWork.TokensRepository.Delete(token.Id);
+            await _unitOfWork.TokensRepository.Delete(token.RefreshToken);
 
             await _unitOfWork.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<Token> RefreshToken(int id, string refreshToken)
+        {
+            var user = await _unitOfWork.UsersRepository.GetById(id);
+
+            if(user == null)
+                return null;
+            
+            var token = await _unitOfWork.TokensRepository.Find(refreshToken);
+
+            if(token == null || token.RefreshTokenExpiration < DateTime.UtcNow)
+                return null;
+
+            var newToken = new Token
+            {
+                AccessToken = UserTokenGenerator.GenerateToken(id,user.Email,_configuration),
+                AccessTokenExpiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationInMinutes"])),
+                RefreshToken = UserTokenGenerator.GenerateRefreshToken(),
+                RefreshTokenExpiration = DateTime.UtcNow.AddDays(5),
+                UserId = user.Id,
+            };
+
+            await _unitOfWork.TokensRepository.Delete(token.RefreshToken);
+            await _unitOfWork.TokensRepository.Add(newToken);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return newToken;
         }
 
         public Task<bool> RemoveProductFromCart(int productId)

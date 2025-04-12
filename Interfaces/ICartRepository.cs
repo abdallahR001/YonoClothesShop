@@ -12,5 +12,6 @@ namespace YonoClothesShop.Interfaces
         public Task<bool> Add(Cart cart);
         public Task<bool> Delete(int id);
         public Task<Cart> GetById(int id);
+        public Task<Cart> GetCartWithCartItems(int userId);
     }
 }

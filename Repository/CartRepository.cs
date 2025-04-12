@@ -52,5 +52,17 @@ namespace YonoClothesShop.Repository
 
             return cart;
         }
+
+        public async Task<Cart> GetCartWithCartItems(int userId)
+        {
+            var cart = await _dbContext.Carts
+            .Include(c => c.cartItems)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if(cart == null)
+                return null;
+            
+            return cart;
+        }
     }
 }

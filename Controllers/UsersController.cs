@@ -35,7 +35,7 @@ namespace YonoClothesShop.Controllers
             return BadRequest(new {message = "user already exists"});
         }
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(LoginModel request)
+        public async Task<ActionResult<Token>> Login(LoginModel request)
         {
             var token = await _userService.Login(request.Email, request.Password);
             if(token == null)
@@ -56,6 +56,21 @@ namespace YonoClothesShop.Controllers
                 return Ok(new {message = "logged out successfully"});
 
             return NotFound(new {message = "user or token not found"});
+        }
+        [HttpGet("refresh-token"),Authorize]
+        public async Task<ActionResult> RefreshToken([FromHeader] string refreshToken)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Unauthorized();
+
+            var newToken = await _userService.RefreshToken(id,refreshToken);
+
+            if(newToken == null)
+                return NotFound(new {message = "user or token not found"});
+
+            return Ok(newToken);
         }
         [HttpGet("profile"),Authorize]
         public async Task<ActionResult<UserDTO>> GetProfile()
