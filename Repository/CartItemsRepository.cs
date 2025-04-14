@@ -41,5 +41,13 @@ namespace YonoClothesShop.Repository
             _dbContext.Remove(cartItem);
             return true;
         }
+
+        public bool DeleteRange(List<CartItem> cartItems)
+        {
+            if(!cartItems.Any())
+                return false;
+            _dbContext.CartItems.RemoveRange(cartItems);
+            return true;
+        }
     }
 }

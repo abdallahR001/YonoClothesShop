@@ -16,7 +16,6 @@ namespace YonoClothesShop.Services
 {
     public class UserService : IUserService
     {
-        // to do: remove cart items when you checkout
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
 
@@ -82,11 +81,17 @@ namespace YonoClothesShop.Services
                 
                 exsistingCart.cartItems.Add(cartItem);
 
-                exsistingCart.TotalPrice += exsistingCart.cartItems
-                .Sum(c => c.Quantity * c.UnitPrice);
+                if(user.Amount < exsistingCart.TotalPrice)
+                    return false;
 
                 await _unitOfWork.CartItemsRepository.Add(cartItem);
             }
+
+            exsistingCart.TotalPrice = exsistingCart.cartItems
+                .Sum(c => c.Quantity * c.UnitPrice);
+
+            if(user.Amount < exsistingCart.TotalPrice)
+                    return false;
 
             product.Count -= quantity;
                 
@@ -153,6 +158,10 @@ namespace YonoClothesShop.Services
             user.Amount -= order.TotalPrice;
 
             user.OrdersCount++;
+
+            _unitOfWork.CartItemsRepository.DeleteRange(cartItems);
+
+            await _unitOfWork.CartsRepository.Delete(cart.Id);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -346,9 +355,19 @@ namespace YonoClothesShop.Services
             throw new NotImplementedException();
         }
 
-        public Task<Cart> ViewCart(int id)
+        public async Task<CartDTO> ViewCart(int id)
         {
-            throw new NotImplementedException();
+            var cart = await _unitOfWork.UsersRepository.GetUserWithCart(id);
+
+            if(cart == null)
+                return null;
+
+            return new CartDTO
+            {
+                Id = cart.Id,
+                UserId = cart.UserId,
+                TotalPrice = cart.TotalPrice,
+            };
         }
     }
 }

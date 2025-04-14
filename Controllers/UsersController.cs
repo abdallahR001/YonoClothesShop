@@ -120,6 +120,21 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "added successfully"});
         }
+        [HttpGet("view-cart"),Authorize]
+        public async Task<ActionResult<CartDTO>> ViewCart()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if(!int.TryParse(userId,out int id))
+                return Forbid();
+
+            var cart = await _userService.ViewCart(id);
+
+            if(cart == null)
+                return NotFound(new {message = "cart not found"});
+
+            return Ok(cart);
+        }
         [HttpGet("checkout"),Authorize]
         public async Task<ActionResult> Checkout()
         {

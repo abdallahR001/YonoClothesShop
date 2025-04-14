@@ -80,5 +80,17 @@ namespace YonoClothesShop.Repository
             return false;
         }
 
+        public async Task<Cart> GetUserWithCart(int id)
+        {
+            var user = await _dbContext.Users
+            .AsNoTracking()
+            .Include(u => u.cart)
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+            if(user.cart == null)
+                return null;
+
+            return user.cart;
+        }
     }
 }

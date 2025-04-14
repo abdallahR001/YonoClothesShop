@@ -21,5 +21,6 @@ namespace YonoClothesShop.Models
         public string? ProfileImage { get; set; }
         public int Amount { get; set; }
         public int OrdersCount { get; set; }
+        public Cart? cart { get; set; }
     }
 }
