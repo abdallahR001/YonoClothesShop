@@ -76,6 +76,7 @@ namespace YonoClothesShop.Services
                     Quantity = quantity,
                     UnitPrice = product.Price,
                     ProductImage = product.Image,
+                    cart = exsistingCart
                 };
             
                 
@@ -87,7 +88,7 @@ namespace YonoClothesShop.Services
                 await _unitOfWork.CartItemsRepository.Add(cartItem);
             }
 
-            exsistingCart.TotalPrice = exsistingCart.cartItems
+            exsistingCart.TotalPrice += exsistingCart.cartItems
                 .Sum(c => c.Quantity * c.UnitPrice);
 
             if(user.Amount < exsistingCart.TotalPrice)
@@ -338,6 +339,7 @@ namespace YonoClothesShop.Services
             };
 
             await _unitOfWork.TokensRepository.Delete(token.RefreshToken);
+
             await _unitOfWork.TokensRepository.Add(newToken);
 
             await _unitOfWork.SaveChangesAsync();
@@ -345,9 +347,35 @@ namespace YonoClothesShop.Services
             return newToken;
         }
 
-        public Task<bool> RemoveProductFromCart(int productId)
+        public async Task<int> RemoveProductFromCart(int userId,int productId)
         {
-            throw new NotImplementedException();
+            var cart = await _unitOfWork.UsersRepository.GetUserCart(userId);
+
+            if(cart == null)
+                return 0;
+
+            var cartItems = await _unitOfWork.CartItemsRepository.GetCartItems(cart.Id);
+
+            if(cartItems == null || !cartItems.Any())
+                return -1;
+
+            var cartItem = cartItems.FirstOrDefault(c => c.ProductId == productId);
+
+            if(cartItem == null)
+                return -2;
+
+            await _unitOfWork.CartItemsRepository.Delete(cartItem.Id);
+
+            cart.cartItems.Remove(cartItem);
+
+            cart.TotalPrice = cart.cartItems.Sum(c => c.Quantity * c.UnitPrice);
+
+            if(cart.TotalPrice <= 0)
+                await _unitOfWork.CartsRepository.Delete(cart.Id);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return 1;
         }
 
         public Task<bool> UpdateAccount(string name = null, string email = null, string password = null, string address = null, IFormFile profileImage = null)
@@ -357,7 +385,7 @@ namespace YonoClothesShop.Services
 
         public async Task<CartDTO> ViewCart(int id)
         {
-            var cart = await _unitOfWork.UsersRepository.GetUserWithCart(id);
+            var cart = await _unitOfWork.UsersRepository.GetUserCart(id);
 
             if(cart == null)
                 return null;

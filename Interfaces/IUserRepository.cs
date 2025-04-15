@@ -13,7 +13,7 @@ namespace YonoClothesShop.Interfaces
     {
         public IQueryable<User> Users { get; set; }
         public Task<User> GetById(int id);
-        public Task<Cart> GetUserWithCart(int id);
+        public Task<Cart> GetUserCart(int id);
         public Task<List<User>> GetByFilter(Expression<Func<User, bool>> filter);
         public Task<List<User>> GetAll();
         public Task<User> GetByEmail(string email);
