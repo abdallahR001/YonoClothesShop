@@ -19,7 +19,7 @@ namespace YonoClothesShop.Interfaces
         public Task<bool> DeleteAccount(int id);
         public Task<ReviewDTO> AddReview(string review, int rating);
         public Task<bool> AddProductToCart(int userId,int productId, int quantity);
-        public Task<bool> RemoveProductFromCart(int productId);
+        public Task<int> RemoveProductFromCart(int userId,int productId);
         public Task<CartDTO> ViewCart(int id);
         public Task<bool> ClearCart();
         public Task<bool> Deposit(int id, int amount);

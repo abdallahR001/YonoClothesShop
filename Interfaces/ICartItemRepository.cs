@@ -10,6 +10,8 @@ namespace YonoClothesShop.Interfaces
     {
         public IQueryable<CartItem> CartItems { get; set; }
         public Task<bool> Add(CartItem cartItem);
+        public Task<List<CartItem>> GetCartItems(int cartId);
+        public Task<CartItem> Find(int cartId,int productId);
         public Task<bool> Delete(int id);
         public bool DeleteRange(List<CartItem> cartItems);
     }

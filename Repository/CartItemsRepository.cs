@@ -49,5 +49,26 @@ namespace YonoClothesShop.Repository
             _dbContext.CartItems.RemoveRange(cartItems);
             return true;
         }
+
+        public async Task<CartItem> Find(int cartId, int productId)
+        {
+            var cartItem = await _dbContext.CartItems
+            .FirstOrDefaultAsync(c => c.CartId == cartId && c.ProductId == productId);
+
+            if(cartItem == null)
+                return null;
+
+            return cartItem;
+        }
+
+        public async Task<List<CartItem>> GetCartItems(int cartId)
+        {
+            var cartItems = await _dbContext.CartItems.Where(c => c.CartId == cartId).ToListAsync();
+
+            if(!cartItems.Any())
+                return null;
+
+            return cartItems;
+        }
     }
 }

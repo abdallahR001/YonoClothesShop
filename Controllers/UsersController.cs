@@ -120,6 +120,27 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "added successfully"});
         }
+        [HttpPut("remove-from-cart/{productId}"),Authorize]
+        public async Task<ActionResult> RemoveFromCart(int productId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if(!int.TryParse(userId,out int id))
+                return Forbid();
+
+            var isRemoved = await _userService.RemoveProductFromCart(id,productId);
+
+            if(isRemoved == 0)
+                return NotFound(new {message = "cart not found"});
+
+            if(isRemoved == -1)
+                return NotFound(new {message = "cart is empty"});
+
+            if(isRemoved == -2)
+                return NotFound(new {message = "product not found"});
+
+            return Ok(new {message = "removed successfully"});
+        }
         [HttpGet("view-cart"),Authorize]
         public async Task<ActionResult<CartDTO>> ViewCart()
         {
