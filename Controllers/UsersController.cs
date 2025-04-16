@@ -156,6 +156,21 @@ namespace YonoClothesShop.Controllers
 
             return Ok(cart);
         }
+        [HttpPut("clear-cart"),Authorize]
+        public async Task<ActionResult> ClearCart()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if(!int.TryParse(userId,out int id))
+                return Forbid();
+
+            var isCleared = await _userService.ClearCart(id);
+
+            if(!isCleared)
+                return NotFound(new {message = "cart not found"});
+
+            return Ok(new {message = "deleted successfully"});
+        }
         [HttpGet("checkout"),Authorize]
         public async Task<ActionResult> Checkout()
         {

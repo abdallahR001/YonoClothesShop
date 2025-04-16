@@ -79,7 +79,6 @@ namespace YonoClothesShop.Services
                     cart = exsistingCart
                 };
             
-                
                 exsistingCart.cartItems.Add(cartItem);
 
                 if(user.Amount < exsistingCart.TotalPrice)
@@ -169,9 +168,22 @@ namespace YonoClothesShop.Services
             return true;
         }
 
-        public Task<bool> ClearCart()
+        public async Task<bool> ClearCart(int id)
         {
-            throw new NotImplementedException();
+            var cart = await _unitOfWork.UsersRepository.GetUserCart(id);
+
+            if(cart == null)
+                return false;
+
+            var cartItems = await _unitOfWork.CartItemsRepository.GetCartItems(cart.Id);
+
+            _unitOfWork.CartItemsRepository.DeleteRange(cartItems);
+
+            await _unitOfWork.CartsRepository.Delete(cart.Id);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<bool> CreateAccount(string name, string email, string password, string address, IFormFile profileImage)
@@ -363,6 +375,10 @@ namespace YonoClothesShop.Services
 
             if(cartItem == null)
                 return -2;
+
+            var product = await _unitOfWork.ProductsRepository.GetById(cartItem.ProductId);
+
+            product.Count += cartItem.Quantity;
 
             await _unitOfWork.CartItemsRepository.Delete(cartItem.Id);
 
