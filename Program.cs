@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using YonoClothesShop.Data;
 using YonoClothesShop.Interfaces;
+using YonoClothesShop.Interfaces.ServicesInterfaces;
 using YonoClothesShop.Models;
 using YonoClothesShop.Repository;
 using YonoClothesShop.Services;
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<ISupplierService,SupplierService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",

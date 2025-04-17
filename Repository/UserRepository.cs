@@ -49,11 +49,9 @@ namespace YonoClothesShop.Repository
             return user;
         }
 
-        public async Task<bool> Add(User entity)
+        public async Task Add(User entity)
         {
             await _dbContext.Users.AddAsync(entity);
-
-            return true;
         }
 
         public async Task<bool> Update(int id,User User)

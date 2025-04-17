@@ -16,6 +16,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\325992f3-fc8a-4cb2-89de-79652ae392ec_sunset-mountain-beautiful-digital-art-scenery-4k-wallpaper-uhdpaper.com-183@1@n.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\4f2d0e92-a3ae-48d6-be9c-8e4d501eb2d8_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/4f2d0e92-a3ae-48d6-be9c-8e4d501eb2d8_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\4f2d0e92-a3ae-48d6-be9c-8e4d501eb2d8_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5695d79b-fa8b-400d-93eb-a38cdbd4467f_adminsAndEmployees.png))">
       <SourceType>Package</SourceType>
       <SourceId>YonoClothesShop</SourceId>

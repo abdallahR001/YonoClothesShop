@@ -112,7 +112,7 @@ namespace YonoClothesShop.Repository
             if(minPrice <= 0)
                 return null;
 
-            var filtredProducts = Products.Where(p => p.CategoryId == categoryId && p.Price >= minPrice);
+            var filtredProducts = _dbContext.Products.Where(p => p.CategoryId == categoryId && p.Price >= minPrice);
 
             if(maxPrice.HasValue && maxPrice > 0)
                 filtredProducts = filtredProducts.Where(p => p.Price <= maxPrice);

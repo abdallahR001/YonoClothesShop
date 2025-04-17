@@ -17,7 +17,7 @@ namespace YonoClothesShop.Interfaces
         public Task<List<User>> GetByFilter(Expression<Func<User, bool>> filter);
         public Task<List<User>> GetAll();
         public Task<User> GetByEmail(string email);
-        public Task<bool> Add(User entity);
+        public Task Add(User entity);
         public Task<bool> Update(int id,User User);
         public Task<bool> Delete(int id);
     }
