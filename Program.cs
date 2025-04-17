@@ -25,8 +25,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
-        builder => builder.AllowAnyOrigin()
+    options.AddPolicy("AllowAll",
+        builder => 
+            builder.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -62,6 +63,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();
