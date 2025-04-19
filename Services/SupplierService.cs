@@ -45,7 +45,7 @@ namespace YonoClothesShop.Services
             if(!supplier)
                 return false;
 
-            _unitOfWork.SuppliersRepository.Delete(id);
+            await _unitOfWork.SuppliersRepository.Delete(id);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -61,6 +61,7 @@ namespace YonoClothesShop.Services
 
             return new SupplierDTO
             {
+                Id = supplier.Id,
                 Name = supplier.Name,
                 CompanyName = supplier.CompanyName,
                 PhoneNumber = supplier.PhoneNumber,
@@ -74,19 +75,47 @@ namespace YonoClothesShop.Services
             return await _unitOfWork.SuppliersRepository.GetSuppliers();
         }
 
-        public Task<List<SupplierDTO>> GetSuppliersByDeleveriesCount(int min, int? max = null)
+        public async Task<List<SupplierDTO>> GetSuppliersByDeleveriesCount(int min, int? max = null)
         {
-            throw new NotImplementedException();
+            var suppliers = await _unitOfWork.SuppliersRepository.GetSuppliersByDeleveriesCount(min,max);
+
+            if(!suppliers.Any())
+                return null;
+
+            return suppliers;
         }
 
-        public Task<List<SupplierDTO>> GetSuppliersByTotalDeleveriesPrice(int min, int? max = null)
+        public async Task<List<SupplierDTO>> GetSuppliersByTotalDeleveriesPrice(int min, int? max = null)
         {
-            throw new NotImplementedException();
+            var suppliers = await _unitOfWork.SuppliersRepository.GetSuppliersByTotalDeleveriesPrice(min,max);
+
+            if(!suppliers.Any())
+                return null;
+
+            return suppliers;
         }
 
-        public Task<bool> Update(int id, string name = null, string companyName = null, string phoneNumber = null)
+        public async Task<bool> Update(int id, string name = null, string companyName = null, string phoneNumber = null)
         {
-            throw new NotImplementedException();
+            var supplier = await _unitOfWork.SuppliersRepository.GetById(id);
+
+            if(supplier == null)
+                return false;
+
+            if(!string.IsNullOrWhiteSpace(name))
+                supplier.Name = name;
+
+            if(!string.IsNullOrWhiteSpace(companyName))
+                supplier.CompanyName = companyName;
+
+            if(!string.IsNullOrWhiteSpace(phoneNumber))
+                supplier.PhoneNumber = phoneNumber;
+
+            _unitOfWork.SuppliersRepository.Update(supplier);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
         }
     }
 }

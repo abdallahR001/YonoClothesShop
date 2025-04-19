@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.Data;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
 
@@ -58,7 +59,7 @@ namespace YonoClothesShop.Repository
             return await _dbContext.Suppliers.ToListAsync();
         }
 
-        public async Task<List<Supplier>> GetSuppliersByDeleveriesCount(int min, int? max = null)
+        public async Task<List<SupplierDTO>> GetSuppliersByDeleveriesCount(int min, int? max = null)
         {
             var suppliers = _dbContext.Suppliers.Where(s => s.DeleveriesCount >= min);
 
@@ -68,10 +69,19 @@ namespace YonoClothesShop.Repository
             if(!suppliers.Any())
                 return null;
 
-            return await suppliers.ToListAsync();
+            return await suppliers.Select(s => new SupplierDTO
+            {
+                Id = s.Id,
+                Name = s.Name,
+                CompanyName = s.CompanyName,
+                PhoneNumber = s.PhoneNumber,
+                DeleveriesCount = s.DeleveriesCount,
+                TotalDeleveriesPrice = s.TotalDeleveriesPrice
+            }
+            ).ToListAsync();
         }
 
-        public async Task<List<Supplier>> GetSuppliersByTotalDeleveriesPrice(int min, int? max = null)
+        public async Task<List<SupplierDTO>> GetSuppliersByTotalDeleveriesPrice(int min, int? max = null)
         {
             var suppliers = _dbContext.Suppliers.Where(s => s.TotalDeleveriesPrice >= min);
 
@@ -81,26 +91,22 @@ namespace YonoClothesShop.Repository
             if(!suppliers.Any())
                 return null;
 
-            return await suppliers.ToListAsync();
+            return await suppliers.Select(s => new SupplierDTO
+            {
+                Id = s.Id,
+                Name = s.Name,
+                CompanyName = s.CompanyName,
+                PhoneNumber = s.PhoneNumber,
+                DeleveriesCount = s.DeleveriesCount,
+                TotalDeleveriesPrice = s.TotalDeleveriesPrice
+            }
+            ).ToListAsync();
         }
 
-        public async Task<bool> Update(int id,string name = null, string companyName = null, string phoneNumber = null)
+        public void Update(Supplier supplier)
         {
-            var supplier = await _dbContext.Suppliers.FindAsync(id);
-
-            if(supplier == null)
-                return false;
-
-            if(!string.IsNullOrWhiteSpace(name))
-                supplier.Name = name;
-
-            if(!string.IsNullOrWhiteSpace(companyName))
-                supplier.CompanyName = companyName;
-
-            if(!string.IsNullOrWhiteSpace(phoneNumber))
-                supplier.PhoneNumber = phoneNumber;
-
-            return true;
+            _dbContext.Suppliers.Update(supplier);
         }
+
     }
 }

@@ -25,18 +25,25 @@ namespace YonoClothesShop.Services
             if(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || image.Length == 0 || image == null || price <= 0 || count < 0 || categoryId <= 0)
                 return -2;
 
+            var category = await _unitOfWork.CategoriesRepository.GetCategoryById(categoryId);
+
+            if(category == null)
+                return 0;
+
             var product = new Product
             {
                 Name = name,
                 Description = description,
                 Price = price,
                 Count = count,
-                CategoryId = categoryId
+                CategoryId = categoryId,
+                category = await _unitOfWork.CategoriesRepository.GetCategoryById(categoryId),
             };
             var isAdded = await _unitOfWork.ProductsRepository.Add(product);
 
             if(!isAdded)
                 return -1;
+
 
             var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
 
@@ -48,6 +55,8 @@ namespace YonoClothesShop.Services
             }
 
             product.Image = fileName;
+
+            category.ProductsCount++;
 
             await _unitOfWork.SaveChangesAsync();
 

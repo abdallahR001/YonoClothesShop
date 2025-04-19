@@ -177,6 +177,13 @@ namespace YonoClothesShop.Services
 
             var cartItems = await _unitOfWork.CartItemsRepository.GetCartItems(cart.Id);
 
+            foreach (var item in cartItems)
+            {
+                var product = await _unitOfWork.ProductsRepository.GetById(item.ProductId);
+
+                product.Count += item.Quantity;
+            }
+
             _unitOfWork.CartItemsRepository.DeleteRange(cartItems);
 
             await _unitOfWork.CartsRepository.Delete(cart.Id);

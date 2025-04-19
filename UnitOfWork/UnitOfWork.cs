@@ -18,8 +18,8 @@ namespace YonoClothesShop.UnitOfWork
         public ICartItemRepository CartItemsRepository { get; private set; }
         public IOrderRepository OrdersRepository { get; private set; }
         public IOrderItemRepository OrderItemsRepository { get; private set; }
-
         public ISupplierRepository SuppliersRepository { get; private set; }
+        public ICategoryRepository CategoriesRepository { get; private set; }
 
         private readonly AppDbContext _dbContext;
         public UnitOfWork(AppDbContext dbContext)
@@ -32,6 +32,7 @@ namespace YonoClothesShop.UnitOfWork
             OrdersRepository = new OrderRepository(_dbContext);
             OrderItemsRepository = new OrderItemRepository(_dbContext);
             SuppliersRepository = new SupplierRepository(_dbContext);
+            CategoriesRepository = new CategoryRepository(_dbContext);
             TokensRepository = new AccessTokenRepository(_dbContext);
         }
         

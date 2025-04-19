@@ -25,6 +25,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<ISupplierService,SupplierService>();
+builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
