@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ATZsUYvCi7DHJ4sys6HuJwJoKvILq99EQWt43UiXWYU=",
+  "Hash": "yMd27J+9pW63kuNOj/+z3m4sfv33DLmWTNO2Rfq+Y1s=",
   "Source": "YonoClothesShop",
   "BasePath": "_content/YonoClothesShop",
   "Mode": "Default",
@@ -262,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\436af916-2975-481e-88d0-559cfbefa06e_myAiImage2.jpg"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\448b8178-9ad8-42df-b976-91d0c9f2cb2f_Leonardo_Phoenix_10_In_a_transcendent_scene_a_young_boy_in_the_1.jpg",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/448b8178-9ad8-42df-b976-91d0c9f2cb2f_Leonardo_Phoenix_10_In_a_transcendent_scene_a_young_boy_in_the_1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\448b8178-9ad8-42df-b976-91d0c9f2cb2f_Leonardo_Phoenix_10_In_a_transcendent_scene_a_young_boy_in_the_1.jpg"
     },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\469d4965-b91b-41dd-b04d-13a58dec22c5_download (1).jpg",

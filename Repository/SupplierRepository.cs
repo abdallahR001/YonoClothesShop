@@ -26,8 +26,7 @@ namespace YonoClothesShop.Repository
         public async Task<bool> CheckIfExists(int id)
         {
             var supplier = await _dbContext.Suppliers
-            .AsNoTracking()
-            .FirstOrDefaultAsync(s => s.Id == id);
+            .AnyAsync(s => s.Id == id);
 
             if(supplier == null)
                 return false;
@@ -64,7 +63,7 @@ namespace YonoClothesShop.Repository
             var suppliers = _dbContext.Suppliers.Where(s => s.DeleveriesCount >= min);
 
             if(max.HasValue && max > 0)
-                suppliers = _dbContext.Suppliers.Where(s => s.DeleveriesCount <= max);
+                suppliers = suppliers.Where(s => s.DeleveriesCount <= max);
 
             if(!suppliers.Any())
                 return null;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Interfaces
@@ -12,8 +13,8 @@ namespace YonoClothesShop.Interfaces
         public Task AddCategory(Category category);
         public Task<bool> UpdateCategory(int id, string name, string image);
         public Task<bool> DeleteCategory(int id);
-        public Task<List<Category>> GetCategories();
+        public Task<List<CategoryDTO>> GetCategories();
         public Task<Category> GetCategoryById(int id);
-        public Task<Category> GetCategoryByName(string name);
+        public Task<CategoryDTO> GetCategoryByName(string name);
     }
 }

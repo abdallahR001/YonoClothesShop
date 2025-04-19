@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Update.Internal;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Interfaces.ServicesInterfaces;
 using YonoClothesShop.Models;
@@ -23,21 +24,21 @@ namespace YonoClothesShop.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<List<Category>>> GetCategories()
+        public async Task<ActionResult<List<CategoryDTO>>> GetCategories()
         {
             var categories = await _categoryService.GetCategories();
 
             return Ok(categories);
         }
         [HttpGet("get-by-name")]
-        public async Task<ActionResult<Category>> GetCategoryByName([FromQuery] string name)
+        public async Task<ActionResult<CategoryDTO>> GetCategoryByName([FromQuery] string name)
         {
             var category = await _categoryService.GetByName(name);
 
             if(category == null)
                 return NotFound(new {message = "category not found"});
 
-            return category;
+            return Ok(category);
         }
         [HttpPost("add-category")]
         public async Task<ActionResult> AddCategory(AddCategoryModel request)

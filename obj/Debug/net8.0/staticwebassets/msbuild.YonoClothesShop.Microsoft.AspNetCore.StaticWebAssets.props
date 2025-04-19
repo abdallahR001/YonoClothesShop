@@ -208,6 +208,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\436af916-2975-481e-88d0-559cfbefa06e_myAiImage2.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\448b8178-9ad8-42df-b976-91d0c9f2cb2f_Leonardo_Phoenix_10_In_a_transcendent_scene_a_young_boy_in_the_1.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/448b8178-9ad8-42df-b976-91d0c9f2cb2f_Leonardo_Phoenix_10_In_a_transcendent_scene_a_young_boy_in_the_1.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\448b8178-9ad8-42df-b976-91d0c9f2cb2f_Leonardo_Phoenix_10_In_a_transcendent_scene_a_young_boy_in_the_1.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\469d4965-b91b-41dd-b04d-13a58dec22c5_download (1).jpg))">
       <SourceType>Package</SourceType>
       <SourceId>YonoClothesShop</SourceId>

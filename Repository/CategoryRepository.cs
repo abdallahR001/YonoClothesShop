@@ -35,11 +35,32 @@ namespace YonoClothesShop.Repository
             return true;
         }
 
-        public async Task<List<Category>> GetCategories()
+        public async Task<List<CategoryDTO>> GetCategories()
         {
-            return await _dbContext.Categories.ToListAsync();
-        }
+            var categories =  await _dbContext.Categories
+            .AsNoTracking()
+            .Select(c => new CategoryDTO
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Image = c.Image,
+                ProductsCount = c.ProductsCount,
+                Products = c.Products.Select(p => new ProductDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Image = p.Image,
+                    Price = p.Price,
+                    Count = p.Count
+                }
+                ).ToList()
+            
+            })
+            .ToListAsync();
 
+            return categories;
+        }
         public async Task<Category> GetCategoryById(int id)
         {
             var category = await _dbContext.Categories.FindAsync(id);
@@ -50,14 +71,30 @@ namespace YonoClothesShop.Repository
             return category;
         }
 
-        public async Task<Category> GetCategoryByName(string name)
+        public async Task<CategoryDTO> GetCategoryByName(string name)
         {
             var category = await _dbContext.Categories
-            .Include(c => c.Products)
-            .FirstOrDefaultAsync(c => c.Name.Contains(name));
-
-            if(category == null)
-                return null;
+            .AsNoTracking()
+            .Where(c => c.Name.ToLower() == name.ToLower())
+            .Select(c => new CategoryDTO
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Image = c.Image,
+                ProductsCount = c.ProductsCount,
+                Products = c.Products.Select(p => new ProductDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Image = p.Image,
+                    Price = p.Price,
+                    Count = p.Count
+                }
+                ).ToList()
+            }
+            )
+            .FirstOrDefaultAsync();
 
             return category;
         }

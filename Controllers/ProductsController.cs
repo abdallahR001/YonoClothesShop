@@ -71,12 +71,12 @@ namespace YonoClothesShop.Controllers
 
             return Ok(products);
         }
-        [HttpPost("add-product")]
-        public async Task<ActionResult<int>> AddProduct(AddProductModel request)
+        [HttpPost("{categoryId}/add-product")]
+        public async Task<ActionResult<int>> AddProduct(int categoryId,AddProductModel request)
         {
             if(!ModelState.IsValid)
                 return BadRequest(new {message = "invalid data"});
-            var ProductId = await _productService.AddProduct(request.Name,request.Description,request.Image,request.Price,request.Count,request.CategoryId);
+            var ProductId = await _productService.AddProduct(request.Name,request.Description,request.Image,request.Price,request.Count,categoryId);
             
             if(ProductId == -1)
                 return BadRequest(new {message = "product already exsists"});

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Interfaces.ServicesInterfaces;
 using YonoClothesShop.Models;
@@ -21,6 +22,9 @@ namespace YonoClothesShop.Services
         public async Task<int> AddCategory(string name, IFormFile image)
         {
             if(string.IsNullOrEmpty(name))
+                return 0;
+
+            if(image == null || image.Length == 0)
                 return 0;
 
             var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
@@ -55,9 +59,9 @@ namespace YonoClothesShop.Services
             return true;
         }
 
-        public Task<Category> GetById(int id)
+        public async Task<Category> GetById(int id)
         {
-            var category = _unitOfWork.CategoriesRepository.GetCategoryById(id);
+            var category = await _unitOfWork.CategoriesRepository.GetCategoryById(id);
 
             if(category == null)
                 return null;
@@ -65,11 +69,12 @@ namespace YonoClothesShop.Services
             return category;
         }
 
-        public Task<Category> GetByName(string name)
+        public async Task<CategoryDTO> GetByName(string name)
         {
             if(string.IsNullOrWhiteSpace(name))
                 return null;
-            var category = _unitOfWork.CategoriesRepository.GetCategoryByName(name);
+
+            var category = await _unitOfWork.CategoriesRepository.GetCategoryByName(name);
 
             if(category == null)
                 return null;
@@ -77,9 +82,9 @@ namespace YonoClothesShop.Services
             return category;
         }
 
-        public Task<List<Category>> GetCategories()
+        public async Task<List<CategoryDTO>> GetCategories()
         {
-            var categories = _unitOfWork.CategoriesRepository.GetCategories();
+            var categories = await _unitOfWork.CategoriesRepository.GetCategories();
 
             return categories;
         }
@@ -90,9 +95,6 @@ namespace YonoClothesShop.Services
 
             if(category == null)
                 return false;
-
-            if(!string.IsNullOrWhiteSpace(name))
-                category.Name = name;
 
             if(image != null && image.Length != 0)
             {
@@ -107,7 +109,11 @@ namespace YonoClothesShop.Services
                 category.Image = fileName;
             }
 
-            return false;
+            await _unitOfWork.CategoriesRepository.UpdateCategory(id,name,category.Image);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
         }
     }
 }
