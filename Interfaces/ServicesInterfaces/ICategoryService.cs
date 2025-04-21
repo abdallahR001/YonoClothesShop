@@ -15,6 +15,7 @@ namespace YonoClothesShop.Interfaces.ServicesInterfaces
         public Task<bool> DeleteCategory(int id);
         public Task<List<CategoryDTO>> GetCategories();
         public Task<Category> GetById(int id);
+        public Task<CategoryDTO> GetCategory(int id);
         public Task<CategoryDTO> GetByName(string name); 
     }
 }
