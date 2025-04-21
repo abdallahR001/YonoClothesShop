@@ -89,6 +89,16 @@ namespace YonoClothesShop.Services
             return categories;
         }
 
+        public async Task<CategoryDTO> GetCategory(int id)
+        {
+            var category = await _unitOfWork.CategoriesRepository.GetCategory(id);
+
+            if(category == null)
+                return null;
+
+            return category;
+        }
+
         public async Task<bool> UpdateCategory(int id, string? name = null, IFormFile? image = null)
         {
             var category = await _unitOfWork.CategoriesRepository.GetCategoryById(id);

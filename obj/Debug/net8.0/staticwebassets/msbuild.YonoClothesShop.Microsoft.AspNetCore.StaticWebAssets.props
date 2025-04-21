@@ -592,6 +592,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c02dab30-cd02-4a53-a76e-201626ab1be3_myAiImage2.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c4cd7270-0f57-4e58-b12b-fce9e475b9f7_a sample of my api.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>YonoClothesShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/YonoClothesShop</BasePath>
+      <RelativePath>images/c4cd7270-0f57-4e58-b12b-fce9e475b9f7_a sample of my api.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c4cd7270-0f57-4e58-b12b-fce9e475b9f7_a sample of my api.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c586f5c9-f24b-4ab2-ad7d-5a43aa8c55c7.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>YonoClothesShop</SourceId>

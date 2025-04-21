@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yMd27J+9pW63kuNOj/+z3m4sfv33DLmWTNO2Rfq+Y1s=",
+  "Hash": "JFNZ9ayUmYYX+kVxrlFn/l0IWup0v+XspuRkyKnRrQA=",
   "Source": "YonoClothesShop",
   "BasePath": "_content/YonoClothesShop",
   "Mode": "Default",
@@ -718,6 +718,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\c02dab30-cd02-4a53-a76e-201626ab1be3_myAiImage2.jpg"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\c4cd7270-0f57-4e58-b12b-fce9e475b9f7_a sample of my api.png",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/c4cd7270-0f57-4e58-b12b-fce9e475b9f7_a sample of my api.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c4cd7270-0f57-4e58-b12b-fce9e475b9f7_a sample of my api.png"
     },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\c586f5c9-f24b-4ab2-ad7d-5a43aa8c55c7.jpg",

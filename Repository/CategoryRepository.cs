@@ -25,10 +25,15 @@ namespace YonoClothesShop.Repository
 
         public async Task<bool> DeleteCategory(int id)
         {
-            var category = await _dbContext.Categories.FindAsync(id);
+            var category = await _dbContext.Categories
+            .Include(c => c.Products)
+            .Where(c => c.Id == id)
+            .FirstOrDefaultAsync();
 
             if(category == null)
                 return false;
+
+            _dbContext.Products.RemoveRange(category.Products);
 
             _dbContext.Categories.Remove(category);
 
@@ -61,6 +66,38 @@ namespace YonoClothesShop.Repository
 
             return categories;
         }
+
+        public async Task<CategoryDTO> GetCategory(int id)
+        {
+            var category = await _dbContext.Categories
+            .AsNoTracking()
+            .Where(c => c.Id == id)
+            .Select(c => new CategoryDTO
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Image = c.Image,
+                ProductsCount = c.ProductsCount,
+                Products = c.Products.Select(p => new ProductDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Image = p.Image,
+                    Price = p.Price,
+                    Count = p.Count
+                }
+                ).ToList()
+            }
+            )
+            .FirstOrDefaultAsync();
+
+            if(category == null)
+                return null;
+
+            return category;
+        }
+
         public async Task<Category> GetCategoryById(int id)
         {
             var category = await _dbContext.Categories.FindAsync(id);
