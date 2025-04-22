@@ -12,5 +12,6 @@ namespace YonoClothesShop.DTOs
         public string? ProfileImage { get; set; }
         public int OrdersCount { get; set; }
         public int Amount { get; set; }
+        public string? Address { get; set; }
     }
 }

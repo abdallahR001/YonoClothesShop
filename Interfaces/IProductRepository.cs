@@ -10,6 +10,7 @@ namespace YonoClothesShop.Interfaces
     {
         public IQueryable<Product> Products { get; set; }
         public Task<Product> GetById(int id);
+        public Task<bool> CheckIfProductExsist(int id);
         public Task<bool> Add(Product product);
         public Task<bool> Delete(int id);
         public Task<bool> Update(int id, Product updatedProduct);

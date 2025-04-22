@@ -119,5 +119,15 @@ namespace YonoClothesShop.Repository
 
             return await filtredProducts.ToListAsync();
         }
+
+        public async Task<bool> CheckIfProductExsist(int id)
+        {
+            var product = await _dbContext.Products.AnyAsync(p => p.Id == id);
+
+            if(!product)
+                return false;
+
+            return true;
+        }
     }
 }

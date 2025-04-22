@@ -57,13 +57,18 @@ namespace YonoClothesShop.Repository
         public async Task<bool> Update(int id,User User)
         {
             var user = await _dbContext.Users.FindAsync(id);
+
             if(user == null)
                 return false;
+
             user.Name = User.Name;
+
             user.Email = User.Email;
+
             user.Address = User.Address;
-            user.Name = User.Name;
+
             _dbContext.Users.Update(user);
+
             return true;
         }
 
@@ -88,6 +93,16 @@ namespace YonoClothesShop.Repository
                 return null;
 
             return cart;
+        }
+
+        public async Task<bool> CheckIfUserExsits(int id)
+        {
+            var user = await _dbContext.Users.AnyAsync(u => u.Id == id);
+
+            if(!user)
+                return false;
+
+            return true;
         }
     }
 }
