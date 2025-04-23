@@ -119,5 +119,26 @@ namespace YonoClothesShop.Repository
 
             return await filtredProducts.ToListAsync();
         }
+
+        public async Task<bool> CheckIfProductExsist(int id)
+        {
+            var product = await _dbContext.Products.AnyAsync(p => p.Id == id);
+
+            if(!product)
+                return false;
+
+            return true;
+        }
+
+        public async Task<Product> GetProductWithReviews(int id)
+        {
+            var product = await _dbContext.Products
+            .Include(r => r.reviews)
+            .ThenInclude(r => r.user)
+            .Where(p => p.Id == id)
+            .FirstOrDefaultAsync();
+
+            return product;
+        }
     }
 }

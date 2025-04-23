@@ -87,6 +87,81 @@ namespace YonoClothesShop.Controllers
             
             return Ok(user);
         }
+        [HttpPut("update-profile"),Authorize]
+        public async Task<ActionResult> UpdateAccount(UpdateUserProfileModel request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var isUpdated = await _userService.UpdateAccount(id,request.Name,request.Address,request.ProfileImage);
+
+            if(!isUpdated)
+                return NotFound(new {message = "user not found"});
+
+            return Ok(new {message = "updated successfully"});
+        }
+        [HttpDelete("delete-account"),Authorize]
+        public async Task<ActionResult> DeleteAccount()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var isDeleted = await _userService.DeleteAccount(id);
+
+            if(!isDeleted)
+                return NotFound(new {message = "user not found"});
+
+            return Ok(new {message = "account deleted successfully"});
+        }
+        [HttpPost("{productId}/add-review"),Authorize]
+        public async Task<ActionResult> AddReview(int productId, AddReviewModel request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var isAdded = await _userService.AddReview(id,productId,request.Review,request.Rating);
+
+            if(!isAdded)
+                return NotFound(new {message = "user or product not found"});
+            
+            return Ok(new {message = "added review successfully"});
+        }
+        [HttpPut("{productId}/update-review"),Authorize]
+        public async Task<ActionResult> UpdateTask(int productId, UpdateReviewModel request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+            
+            var isUpdated = await _userService.UpdateReview(id,productId,request.Review,request.Rating);
+
+            if(!isUpdated)
+                return NotFound(new {message = "user or product or review not found"});
+
+            return Ok(new {message = "updated successfully"});
+        }
+        [HttpDelete("{productId}/delete-review"),Authorize]
+        public async Task<ActionResult> DeleteReview(int productId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var isDeleted = await _userService.DeleteReview(id,productId);  
+
+            if(!isDeleted)
+                return NotFound(new {message = "user or product or review not found"});
+
+            return Ok(new {message = "deleted successfully"});
+        }
         [HttpPost("deposit"),Authorize]
         public async Task<ActionResult> Deposit(DepositModel request)
         {

@@ -31,9 +31,9 @@ namespace YonoClothesShop.Controllers
             return Ok(products);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDTO>> GetProduct(int id)
         {
-            var product = await _productService.GetProduct(id);
+            var product = await _productService.GetProductWithReviews(id);
 
             if(product == null)
                 return NotFound(new {message = "product not found"});
@@ -50,7 +50,6 @@ namespace YonoClothesShop.Controllers
 
             return Ok(products);
         }
-        // TO DO: use the category id in the filter procces to get the products from that category
         [HttpGet("{categoryId}/filter/{minPrice}")]
         public async Task<ActionResult<List<ProductDTO>>> GetProductsFilteredByPrice(int categoryId, int minPrice, int? maxPrice = null)
         {

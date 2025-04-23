@@ -22,5 +22,6 @@ namespace YonoClothesShop.Models
         public int Amount { get; set; }
         public int OrdersCount { get; set; }
         public Cart? cart { get; set; }
+        public List<Review>? reviews { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 
 namespace YonoClothesShop.Models
 {
@@ -19,6 +20,7 @@ namespace YonoClothesShop.Models
         public int CategoryId { get; set; }
         [JsonIgnore]
         public Category? category { get; set; }
+        public List<Review>? reviews { get; set; } = new();
         public int Price { get; set; }
         public int Count { get; set; }
     }

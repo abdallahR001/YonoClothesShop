@@ -21,6 +21,8 @@ namespace YonoClothesShop.UnitOfWork
         public ISupplierRepository SuppliersRepository { get; private set; }
         public ICategoryRepository CategoriesRepository { get; private set; }
 
+        public IReviewRepository ReviewsRepository { get; private set; }
+
         private readonly AppDbContext _dbContext;
         public UnitOfWork(AppDbContext dbContext)
         {
@@ -33,6 +35,7 @@ namespace YonoClothesShop.UnitOfWork
             OrderItemsRepository = new OrderItemRepository(_dbContext);
             SuppliersRepository = new SupplierRepository(_dbContext);
             CategoriesRepository = new CategoryRepository(_dbContext);
+            ReviewsRepository = new ReviewRepository(_dbContext);
             TokensRepository = new AccessTokenRepository(_dbContext);
         }
         
