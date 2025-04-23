@@ -85,6 +85,8 @@ namespace YonoClothesShop.Repository
         public async Task<List<Product>> GetProductsByName(string name)
         {
             var products = await _dbContext.Products
+            .Include(r => r.reviews)
+            .ThenInclude(u => u.user)
             .Where(p => p.Name.Contains(name))
             .ToListAsync();
 

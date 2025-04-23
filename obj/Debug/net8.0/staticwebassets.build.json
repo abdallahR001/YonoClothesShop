@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JFNZ9ayUmYYX+kVxrlFn/l0IWup0v+XspuRkyKnRrQA=",
+  "Hash": "7y4OncxJYSfQ79PD+P+L46pRhYGtaiUJJR01q8Gi+Nw=",
   "Source": "YonoClothesShop",
   "BasePath": "_content/YonoClothesShop",
   "Mode": "Default",
@@ -566,6 +566,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\8a3d483a-8e6e-4e16-9813-4915507e0df8_code.png"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\8a562a75-e299-4ef7-85bf-20096924825e.png",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/8a562a75-e299-4ef7-85bf-20096924825e.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\8a562a75-e299-4ef7-85bf-20096924825e.png"
     },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\915c38ac-e6a4-4802-9de2-674703be5e2f_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg",
