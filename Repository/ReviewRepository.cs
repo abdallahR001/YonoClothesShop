@@ -35,6 +35,17 @@ namespace YonoClothesShop.Repository
             return true;
         }
 
+        public async Task<Review> Find(int userId, int productId)
+        {
+            var review = await _dbContext.Reviews
+            .FirstOrDefaultAsync(r => r.UserId == userId && r.ProductId == productId);
+
+            if(review == null)
+                return null;
+
+            return review;
+        }
+
         public async Task<bool> UpdateReview(int userId, int productId, Review review)
         {
             var user = await _dbContext.Users.AnyAsync(u => u.Id == userId);

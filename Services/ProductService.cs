@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
@@ -106,7 +107,18 @@ namespace YonoClothesShop.Services
                 Description = p.Description,
                 Image = p.Image,
                 Price = p.Price,
-                Count = p.Count
+                Count = p.Count,
+                reviews = p.reviews.Select(r => new ReviewDTO
+                {
+                    Id = r.Id,
+                    UserId = r.UserId,
+                    UserName = r.user.Name,
+                    ProfileImage = r.user.ProfileImage,
+                    Text = r.Text,
+                    ProductId = r.ProductId,
+                    Rate = r.Rate,
+                }
+                ).ToList()
             }
             ).ToList();
         }
@@ -125,7 +137,18 @@ namespace YonoClothesShop.Services
                 Description = p.Description,
                 Image = p.Image,
                 Price = p.Price,
-                Count = p.Count
+                Count = p.Count,
+                reviews = p.reviews.Select(r => new ReviewDTO
+                {
+                    Id = r.Id,
+                    UserId = r.UserId,
+                    UserName = r.user.Name,
+                    ProfileImage = r.user.ProfileImage,
+                    Text = r.Text,
+                    ProductId = r.ProductId,
+                    Rate = r.Rate,
+                }
+                ).ToList()
             }
             ).ToList();
         }
@@ -144,9 +167,49 @@ namespace YonoClothesShop.Services
                 Description = p.Description,
                 Image = p.Image,
                 Price = p.Price,
-                Count = p.Count
+                Count = p.Count,
+                reviews = p.reviews != null ? p.reviews.Select(r => new ReviewDTO
+                {
+                    Id = r.Id,
+                    UserId = r.UserId,
+                    UserName = r.user.Name,
+                    ProfileImage = r.user.ProfileImage,
+                    Text = r.Text,
+                    ProductId = r.ProductId,
+                    Rate = r.Rate,
+                }
+                ).ToList() : new List<ReviewDTO>()
             }
             ).ToList();
+        }
+
+        public async Task<ProductDTO> GetProductWithReviews(int id)
+        {
+            var product = await _unitOfWork.ProductsRepository.GetProductWithReviews(id);
+
+            if(product == null)
+                return null;
+
+            return new ProductDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Count = product.Count,
+                Price = product.Price,
+                Image = product.Image,
+                reviews = product.reviews != null ? product.reviews.Select(r => new ReviewDTO
+                {
+                    Id = r.Id,
+                    UserId = r.UserId,
+                    UserName = r.user.Name,
+                    ProfileImage = r.user.ProfileImage,
+                    Text = r.Text,
+                    ProductId = r.ProductId,
+                    Rate = r.Rate,
+                }
+                ).ToList() : new List<ReviewDTO>()
+            };
         }
 
         public async Task<int> UpdateProduct(int id,string? name, string? description, IFormFile? image, int price, int count)

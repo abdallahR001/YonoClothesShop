@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Interfaces
@@ -17,5 +18,6 @@ namespace YonoClothesShop.Interfaces
         public Task<List<Product>> GetProductsByName(string name);
         public Task<List<Product>> GetProductsByCategory(int id);
         public Task<List<Product>> GetProductsFiltredByPrice(int categoryId,int minPrice, int? maxPrice = null);
+        public Task<Product> GetProductWithReviews(int id);
     }
 }

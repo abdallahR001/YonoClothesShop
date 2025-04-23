@@ -132,6 +132,36 @@ namespace YonoClothesShop.Controllers
             
             return Ok(new {message = "added review successfully"});
         }
+        [HttpPut("{productId}/update-review"),Authorize]
+        public async Task<ActionResult> UpdateTask(int productId, UpdateReviewModel request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+            
+            var isUpdated = await _userService.UpdateReview(id,productId,request.Review,request.Rating);
+
+            if(!isUpdated)
+                return NotFound(new {message = "user or product or review not found"});
+
+            return Ok(new {message = "updated successfully"});
+        }
+        [HttpDelete("{productId}/delete-review"),Authorize]
+        public async Task<ActionResult> DeleteReview(int productId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var isDeleted = await _userService.DeleteReview(id,productId);  
+
+            if(!isDeleted)
+                return NotFound(new {message = "user or product or review not found"});
+
+            return Ok(new {message = "deleted successfully"});
+        }
         [HttpPost("deposit"),Authorize]
         public async Task<ActionResult> Deposit(DepositModel request)
         {

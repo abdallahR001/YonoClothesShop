@@ -11,5 +11,6 @@ namespace YonoClothesShop.Interfaces
         public Task AddReview(Review review);
         public Task<bool> UpdateReview(int userId,int productId,Review review);
         public Task<bool> DeleteReview(int id);
+        public Task<Review> Find(int userId, int productId);
     }
 }

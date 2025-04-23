@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.RateLimiting;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.Identity.Client;
 using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
@@ -108,9 +109,9 @@ namespace YonoClothesShop.Services
             if(user == null)
                 return false;
 
-            var product = await _unitOfWork.ProductsRepository.CheckIfProductExsist(productId);
+            var product = await _unitOfWork.ProductsRepository.GetById(productId);
 
-            if(!product)
+            if(product == null)
                 return false;
 
             var review = new Review
@@ -123,6 +124,8 @@ namespace YonoClothesShop.Services
             };
 
             await _unitOfWork.ReviewsRepository.AddReview(review);
+
+            product.reviews.Add(review);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -265,6 +268,30 @@ namespace YonoClothesShop.Services
             return true;
         }
 
+        public async Task<bool> DeleteReview(int userId, int productId)
+        {
+            var user = await _unitOfWork.UsersRepository.CheckIfUserExsits(userId);
+
+            if(!user)
+                return false;
+
+            var product = await _unitOfWork.ProductsRepository.CheckIfProductExsist(productId);
+
+            if(!product)
+                return false;
+            
+            var review = await _unitOfWork.ReviewsRepository.Find(userId,productId);
+
+            if(review == null)
+                return false;
+            
+            await _unitOfWork.ReviewsRepository.DeleteReview(review.Id);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> Deposit(int id, int amount)
         {
 
@@ -306,14 +333,17 @@ namespace YonoClothesShop.Services
                 return null;
 
             var user = await _unitOfWork.UsersRepository.GetByEmail(email);
+
             if(user == null)
                 return null;
 
             var isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password,user.PasswordHash);
+
             if(!isPasswordCorrect)
                 return null;
 
             var accessToken = UserTokenGenerator.GenerateToken(user.Id,email,_configuration);
+
             var refreshToken = UserTokenGenerator.GenerateRefreshToken();
 
             var existingToken = await _unitOfWork.TokensRepository.Tokens
@@ -464,6 +494,39 @@ namespace YonoClothesShop.Services
             }
 
             await _unitOfWork.UsersRepository.Update(id,user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateReview(int userId, int productId, string? userReview = null, int? rating = null)
+        {
+            if(rating.HasValue && rating < 0)
+                return false;
+
+            var user = await _unitOfWork.UsersRepository.CheckIfUserExsits(userId);
+
+            if(!user)
+                return false;
+
+            var product = await _unitOfWork.ProductsRepository.CheckIfProductExsist(productId);
+
+            if(!product)
+                return false;
+
+            var review = await _unitOfWork.ReviewsRepository.Find(userId,productId);
+
+            if(review == null)
+                return false;
+
+            if(!string.IsNullOrWhiteSpace(userReview))
+                review.Text = userReview;
+
+            if(rating != null)
+                review.Rate = rating;
+
+            await _unitOfWork.ReviewsRepository.UpdateReview(userId,productId,review);
 
             await _unitOfWork.SaveChangesAsync();
 

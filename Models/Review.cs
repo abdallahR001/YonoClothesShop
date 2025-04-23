@@ -13,7 +13,8 @@ namespace YonoClothesShop.Models
         [Required, MaxLength(200)]
         public string? Text { get; set; }
         public int ProductId { get; set; }
-        public int Rate { get; set; }
+        public int? Rate { get; set; }
         public User? user { get; set; }
+        public Product? product { get; set; }
     }
 }
