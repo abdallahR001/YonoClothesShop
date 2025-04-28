@@ -21,7 +21,7 @@ namespace YonoClothesShop.Controllers
             _productService = productService;
         }
         [HttpGet("")]
-        public async Task<ActionResult<List<Product>>> GetAllProducts()
+        public async Task<ActionResult<List<ProductDTO>>> GetAllProducts()
         {
             var products = await _productService.GetProducts();
 
@@ -40,18 +40,8 @@ namespace YonoClothesShop.Controllers
 
             return Ok(product);
         }
-        [HttpGet("category/{id}")]
-        public async Task<ActionResult<List<ProductDTO>>> GetProductsByCategoryId(int id)
-        {
-            var products = await _productService.GetProductsByCategory(id);
-
-            if(products == null)
-                return NotFound(new {message = "categoty not found"});
-
-            return Ok(products);
-        }
-        [HttpGet("{categoryId}/filter/{minPrice}")]
-        public async Task<ActionResult<List<ProductDTO>>> GetProductsFilteredByPrice(int categoryId, int minPrice, int? maxPrice = null)
+        [HttpGet("filter/{categoryId}")]
+        public async Task<ActionResult<List<ProductDTO>>> GetProductsFilteredByPrice(int categoryId, [FromQuery]int minPrice, [FromQuery]int? maxPrice = null)
         {
             var products = await _productService.GetProductsFiltredByPrice(categoryId,minPrice,maxPrice);
 
@@ -70,7 +60,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(products);
         }
-        [HttpPost("{categoryId}/add-product")]
+        [HttpPost("{categoryId}")]
         public async Task<ActionResult<int>> AddProduct(int categoryId,AddProductModel request)
         {
             if(!ModelState.IsValid)
@@ -84,7 +74,7 @@ namespace YonoClothesShop.Controllers
                 return BadRequest(new {message = "invalid data"});
             return Ok(ProductId);
         }
-        [HttpPut("update-product/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<int>> UpdateProduct(int id,UpdateProductModel request)
         {
             if(!ModelState.IsValid)
@@ -97,7 +87,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(productId);
         }
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var isProductDeleted =  await _productService.Delete(id);

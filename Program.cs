@@ -23,9 +23,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<ISupplierService,SupplierService>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<ICartService,CartService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",

@@ -38,7 +38,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(supplier);
         }
-        [HttpPost("get-by-shipments-count")]
+        [HttpPost("filter")]
         public async Task<ActionResult<List<SupplierDTO>>> GetSuppliersByShipmintsCount([FromQuery] int min, [FromQuery] int? max=null)
         {
             var suppliers = await _supplierService.GetSuppliersByDeleveriesCount(min,max);
@@ -48,7 +48,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(suppliers);
         }
-        [HttpPost("add-supplier")]
+        [HttpPost("")]
         public async Task<ActionResult> AddSupplier(AddSupplierModel request)
         {
             if(!ModelState.IsValid)
@@ -60,7 +60,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "added successfully"});
         }
-        [HttpPut("update-supplier/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateSupplier(int id, UpdateSupplierModel request)
         {
             var isUpdated = await _supplierService
@@ -71,7 +71,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "updated supplier successfully"});
         }
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteSupplier(int id)
         {
             var isDeleted = await _supplierService.Delete(id);

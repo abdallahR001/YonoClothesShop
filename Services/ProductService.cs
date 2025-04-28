@@ -76,21 +76,31 @@ namespace YonoClothesShop.Services
             return true;
         }
 
-        public async Task<Product> GetProduct(int id)
+        public async Task<List<ProductDTO>> GetProducts()
         {
-            var product = await _unitOfWork.ProductsRepository.GetById(id);
+            var products = await _unitOfWork.ProductsRepository.GetProducts();
 
-            if(product == null)
-                return null;
-
-            return product;
-        }
-
-        public async Task<List<Product>> GetProducts()
-        {
-            var products = await _unitOfWork.ProductsRepository.Products.ToListAsync();
-
-            return products;
+            return products.Select(p => new ProductDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Image = p.Image,
+                Price = p.Price,
+                Count = p.Count,
+                reviews = p.reviews != null ? p.reviews.Select(r => new ReviewDTO
+                {
+                    Id = r.Id,
+                    UserId = r.UserId,
+                    UserName = r.user.Name,
+                    ProfileImage = r.user.ProfileImage,
+                    Text = r.Text,
+                    ProductId = r.ProductId,
+                    Rate = r.Rate,
+                }
+                ).ToList() : new List<ReviewDTO>()
+            }
+            ).ToList();
         }
 
         public async Task<List<ProductDTO>> GetProductsByCategory(int id)
