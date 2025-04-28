@@ -21,6 +21,16 @@ namespace YonoClothesShop.Repository
             _dbContext = dbContext;
             Products = _dbContext.Products;
         }
+        public async Task<List<Product>> GetProducts()
+        {
+            var products = await _dbContext.Products
+            .AsNoTracking()
+            .Include(p => p.reviews)
+            .ThenInclude(u => u.user)
+            .ToListAsync();
+
+            return products;
+        }
         public async Task<bool> Add(Product product)
         {
             var exsistingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Name == product.Name);

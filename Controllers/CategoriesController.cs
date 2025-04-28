@@ -41,7 +41,7 @@ namespace YonoClothesShop.Controllers
             return Ok(category);
 
         }
-        [HttpGet("get-by-name")]
+        [HttpGet("name")]
         public async Task<ActionResult<CategoryDTO>> GetCategoryByName([FromQuery] string name)
         {
             var category = await _categoryService.GetByName(name);
@@ -51,7 +51,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(category);
         }
-        [HttpPost("add-category")]
+        [HttpPost("")]
         public async Task<ActionResult> AddCategory(AddCategoryModel request)
         {
             if(!ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "added successfully"});
         }
-        [HttpPut("update-category/{categoryId}")]
+        [HttpPut("{categoryId}")]
         public async Task<ActionResult> UpdateCategory(int categoryId,UpdateCategoryModel request)
         {
             var isUpdated = await _categoryService.UpdateCategory(categoryId,request.Name,request.Image);
@@ -74,7 +74,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "updated successfully"});
         }
-        [HttpDelete("delete-category/{categoryId}")]
+        [HttpDelete("{categoryId}")]
         public async Task<ActionResult> DeleteCategory(int categoryId)
         {
             var isDeleted = await _categoryService.DeleteCategory(categoryId);

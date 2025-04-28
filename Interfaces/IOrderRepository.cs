@@ -11,5 +11,6 @@ namespace YonoClothesShop.Interfaces
         public IQueryable<Order> Orders { get; set; }
         public Task<bool> Add(Order orderItem);
         public Task<bool> Delete(int id);
+        public Task<bool> CheckIfOrderExist(int userId,int productId);
     }
 }

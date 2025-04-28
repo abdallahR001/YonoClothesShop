@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using YonoClothesShop.DTOs;
 using YonoClothesShop.Models;
 
 namespace YonoClothesShop.Interfaces
 {
     public interface IProductRepository
     {
-        public IQueryable<Product> Products { get; set; }
+        public Task<List<Product>> GetProducts();
         public Task<Product> GetById(int id);
         public Task<bool> CheckIfProductExsist(int id);
         public Task<bool> Add(Product product);

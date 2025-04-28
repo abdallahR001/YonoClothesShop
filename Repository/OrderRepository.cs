@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using YonoClothesShop.Data;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
@@ -34,6 +35,15 @@ namespace YonoClothesShop.Repository
                 return false;
 
             _dbContext.Orders.Remove(order);
+
+            return true;
+        }
+        public async Task<bool> CheckIfOrderExist(int userId, int productId)
+        {
+            var isOrderExist = await _dbContext.Orders.AnyAsync(o => o.UserId == userId && o.OrderItems.Any(o => o.ProductId == productId));
+
+            if(!isOrderExist)
+                return false;
 
             return true;
         }

@@ -10,8 +10,7 @@ namespace YonoClothesShop.Interfaces
 {
     public interface IProductService
     {
-        public Task<List<Product>> GetProducts();
-        public Task<Product> GetProduct(int id);
+        public Task<List<ProductDTO>> GetProducts();
         public Task<List<ProductDTO>> GetProductsByCategory(int id);
         public Task<List<ProductDTO>> GetProductsByName(string Name);
         public Task<List<ProductDTO>> GetProductsFiltredByPrice(int categoryId, int minPrice, int? maxPrice = null);

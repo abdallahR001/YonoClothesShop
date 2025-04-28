@@ -16,5 +16,6 @@ namespace YonoClothesShop.DTOs
         public int Price { get; set; }
         public int Count { get; set; }
         public List<ReviewDTO>? reviews { get; set; }
+        public CategoryDTO? category;
     }
 }
