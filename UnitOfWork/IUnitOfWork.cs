@@ -18,7 +18,8 @@ namespace YonoClothesShop.UnitOfWork
         IOrderItemRepository OrderItemsRepository { get; }
         ISupplierRepository SuppliersRepository { get; }
         ICategoryRepository CategoriesRepository { get; }
-        IReviewRepository   ReviewsRepository { get; }
+        IReviewRepository ReviewsRepository { get; }
+        IInventoryRepository inventoryRepository { get; }
         ITokenRepository TokensRepository { get; }
         Task<int> SaveChangesAsync();
     }

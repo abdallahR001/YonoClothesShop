@@ -37,7 +37,7 @@ namespace YonoClothesShop.Repository
 
             if(exsistingProduct == null)
             {
-                await _dbContext.AddAsync(product);
+                await _dbContext.Products.AddAsync(product);
                 return true;
             }
                 

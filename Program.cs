@@ -28,6 +28,7 @@ builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<ISupplierService,SupplierService>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<IInventoryService,InventoryService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",

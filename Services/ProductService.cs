@@ -222,47 +222,47 @@ namespace YonoClothesShop.Services
             };
         }
 
-        public async Task<int> UpdateProduct(int id,string? name, string? description, IFormFile? image, int price, int count)
-        {
-            var product = await _unitOfWork.ProductsRepository.GetById(id);
+        // public async Task<int> UpdateProduct(int id,string? name, string? description, IFormFile? image, int price, int count)
+        // {
+        //     var product = await _unitOfWork.ProductsRepository.GetById(id);
 
-            if(product == null)
-                return -1;
+        //     if(product == null)
+        //         return -1;
 
-            if(!string.IsNullOrWhiteSpace(name))
-                product.Name = name;
+        //     if(!string.IsNullOrWhiteSpace(name))
+        //         product.Name = name;
 
-            if(!string.IsNullOrWhiteSpace(description))
-                product.Description = description;
+        //     if(!string.IsNullOrWhiteSpace(description))
+        //         product.Description = description;
 
-            if(image != null && image.Length > 0)
-            {
-                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
+        //     if(image != null && image.Length > 0)
+        //     {
+        //         var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
 
-                var imagePath = Path.Combine("wwwroot/images", fileName);
+        //         var imagePath = Path.Combine("wwwroot/images", fileName);
 
-                using (var stream = new FileStream(imagePath, FileMode.Create))
-                {
-                    await image.CopyToAsync(stream);
-                }
+        //         using (var stream = new FileStream(imagePath, FileMode.Create))
+        //         {
+        //             await image.CopyToAsync(stream);
+        //         }
 
-                product.Image = $"/images/{fileName}";
-            }
+        //         product.Image = $"/images/{fileName}";
+        //     }
 
-            if(price > 0)
-                product.Price = price;
+        //     if(price > 0)
+        //         product.Price = price;
 
-            if(count >= 0)
-                product.Count = count;
+        //     if(count >= 0)
+        //         product.Count = count;
 
-            var isUpdated = await _unitOfWork.ProductsRepository.Update(product.Id, product);
+        //     var isUpdated = await _unitOfWork.ProductsRepository.Update(product.Id, product);
 
-            if(!isUpdated)
-                return -1;
+        //     if(!isUpdated)
+        //         return -1;
 
-            await _unitOfWork.SaveChangesAsync();
+        //     await _unitOfWork.SaveChangesAsync();
 
-            return product.Id;
-        }
+        //     return product.Id;
+        // }
     }
 }

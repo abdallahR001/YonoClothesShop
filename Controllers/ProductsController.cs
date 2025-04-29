@@ -74,19 +74,19 @@ namespace YonoClothesShop.Controllers
                 return BadRequest(new {message = "invalid data"});
             return Ok(ProductId);
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult<int>> UpdateProduct(int id,UpdateProductModel request)
-        {
-            if(!ModelState.IsValid)
-                return BadRequest(new {message = "invalid data"});
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<int>> UpdateProduct(int id,UpdateProductModel request)
+        // {
+        //     if(!ModelState.IsValid)
+        //         return BadRequest(new {message = "invalid data"});
 
-            var productId = await _productService.UpdateProduct(id,request.Name,request.Description,request.Image,request.Price,request.Count);
+        //     var productId = await _productService.UpdateProduct(id,request.Name,request.Description,request.Image,request.Price,request.Count);
 
-            if(productId == -1)
-                return NotFound(new {message = "product not found"});
+        //     if(productId == -1)
+        //         return NotFound(new {message = "product not found"});
 
-            return Ok(productId);
-        }
+        //     return Ok(productId);
+        // }
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
