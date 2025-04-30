@@ -75,6 +75,16 @@ namespace YonoClothesShop.Services
             return await _unitOfWork.SuppliersRepository.GetSuppliers();
         }
 
+        public async Task<Supplier> GetSupplierByNameAndCompanyName(string supplierName,string companyName)
+        {
+            var supplier = await _unitOfWork.SuppliersRepository.GetSupplierByNameAndCompanyName(supplierName,companyName);
+
+            if(supplier == null)
+                return null;
+
+            return supplier;
+        }
+
         public async Task<List<SupplierDTO>> GetSuppliersByDeleveriesCount(int min, int? max = null)
         {
             var suppliers = await _unitOfWork.SuppliersRepository.GetSuppliersByDeleveriesCount(min,max);

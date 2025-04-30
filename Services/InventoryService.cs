@@ -14,9 +14,9 @@ namespace YonoClothesShop.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> AddProduct(string name, string description, IFormFile image, int price, int supplierPrice, int count, int categoryId, int supplierId)
+        public async Task<int> AddProduct(string name, string description, IFormFile image, int price, int supplierPrice, int count, int categoryId,string supplierName,string companyName)
         {
-            if(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || image.Length == 0 || image == null || price <= 0 || count < 0 || categoryId <= 0 || supplierId <= 0)
+            if(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || image.Length == 0 || image == null || price <= 0 || count < 0 || categoryId <= 0 || string.IsNullOrEmpty(supplierName) || string.IsNullOrEmpty(companyName))
                 return -2;
 
             var category = await _unitOfWork.CategoriesRepository.GetCategoryById(categoryId);
@@ -24,7 +24,7 @@ namespace YonoClothesShop.Services
             if(category == null)
                 return 0;
 
-            var supplier = await _unitOfWork.SuppliersRepository.GetById(supplierId);
+            var supplier = await _unitOfWork.SuppliersRepository.GetSupplierByNameAndCompanyName(supplierName,companyName);
 
             if(supplier == null)
                 return -3;
@@ -37,7 +37,10 @@ namespace YonoClothesShop.Services
                 Count = count,
                 CategoryId = categoryId,
                 category = await _unitOfWork.CategoriesRepository.GetCategoryById(categoryId),
-                SupplierPrice = supplierPrice
+                supplier = supplier,
+                SupplierId = supplier.Id,
+                SupplierPrice = supplierPrice,
+                AddedAt = DateTime.UtcNow,
             };
             var isAdded = await _unitOfWork.inventoryRepository.AddInventoryProduct(product);
 
@@ -67,18 +70,52 @@ namespace YonoClothesShop.Services
             return product.Id;
         }
 
-        public async Task<int> UpdateProduct(int id,string? name, string? description, IFormFile? image, int price, int count)
+        public async Task<InventoryDTO> GetProduct(int id)
         {
             var product = await _unitOfWork.inventoryRepository.GetInventoryProductById(id);
 
             if(product == null)
+                return null;
+
+            return new InventoryDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Image = product.Image,
+                Price = product.Price,
+                Count = product.Count,
+                SupplierId = product.supplier.Id,
+                SupplierName = product.supplier.Name,
+                SupplierCompany = product.supplier.CompanyName,
+                SupplierPrice = product.SupplierPrice,
+            };
+        }
+
+        public async Task<int> UpdateProduct(int id,string? name, string? description, IFormFile? image, int price, int count)
+        {
+            var inventoryProduct = await _unitOfWork.inventoryRepository.GetInventoryProductById(id);
+
+            if(inventoryProduct == null)
                 return -1;
 
+            var product = await _unitOfWork.ProductsRepository.GetProductByName(inventoryProduct.Name);
+
             if(!string.IsNullOrWhiteSpace(name))
-                product.Name = name;
+            {
+                inventoryProduct.Name = name;
+
+                if(product != null)
+                    product.Name = name;
+            }
 
             if(!string.IsNullOrWhiteSpace(description))
-                product.Description = description;
+            {
+                inventoryProduct.Description = description;
+
+                if(product != null)
+                    product.Description = description;
+            }
 
             if(image != null && image.Length > 0)
             {
@@ -91,23 +128,30 @@ namespace YonoClothesShop.Services
                     await image.CopyToAsync(stream);
                 }
 
-                product.Image = $"/images/{fileName}";
+                inventoryProduct.Image = $"/images/{fileName}";
+
+                if(product != null)
+                    product.Image = $"/images/{fileName}";
             }
 
             if(price > 0)
-                product.Price = price;
-
+            {
+                inventoryProduct.Price = price;
+                if(product != null)
+                    product.Price = price;
+            }
+                
             if(count >= 0)
-                product.Count = count;
+                inventoryProduct.Count = count;
 
-            var isUpdated = await _unitOfWork.inventoryRepository.UpdateInventoryProduct(product.Id, product);
+            var isUpdated = await _unitOfWork.inventoryRepository.UpdateInventoryProduct(inventoryProduct.Id, inventoryProduct);
 
             if(!isUpdated)
                 return -1;
 
             await _unitOfWork.SaveChangesAsync();
 
-            return product.Id;
+            return inventoryProduct.Id;
         }
 
         public async Task<bool> Delete(int id)

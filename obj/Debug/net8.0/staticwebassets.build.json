@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7y4OncxJYSfQ79PD+P+L46pRhYGtaiUJJR01q8Gi+Nw=",
+  "Hash": "ZDS5mXzOa+8pSlMQJK9peNNDTejVK8HWovGc2g77xHA=",
   "Source": "YonoClothesShop",
   "BasePath": "_content/YonoClothesShop",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\325992f3-fc8a-4cb2-89de-79652ae392ec_sunset-mountain-beautiful-digital-art-scenery-4k-wallpaper-uhdpaper.com-183@1@n.jpg"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\3c3ea616-8996-4935-b6d6-67e559e1259f_yono clothes shop api after refactoring.png",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/3c3ea616-8996-4935-b6d6-67e559e1259f_yono clothes shop api after refactoring.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\3c3ea616-8996-4935-b6d6-67e559e1259f_yono clothes shop api after refactoring.png"
     },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\3d034654-91f8-4ccb-8930-5afec34e7c84_myAiImage2.jpg",
@@ -718,6 +737,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\ba6151cd-4174-423b-8684-6b7c9262a4f6_myAiImage2.jpg"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\bbe57d0c-ef73-465b-81a0-5420d183caa9_yono clothes shop api after refactoring.png",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/bbe57d0c-ef73-465b-81a0-5420d183caa9_yono clothes shop api after refactoring.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bbe57d0c-ef73-465b-81a0-5420d183caa9_yono clothes shop api after refactoring.png"
     },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\c02dab30-cd02-4a53-a76e-201626ab1be3_myAiImage2.jpg",
