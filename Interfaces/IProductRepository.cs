@@ -17,6 +17,7 @@ namespace YonoClothesShop.Interfaces
         public Task<bool> Delete(int id);
         public Task<bool> Update(int id, Product updatedProduct);
         public Task<List<Product>> GetProductsByName(string name);
+        public Task<Product> GetProductByName(string name);
         public Task<List<Product>> GetProductsByCategory(int id);
         public Task<List<Product>> GetProductsFiltredByPrice(int categoryId,int minPrice, int? maxPrice = null);
         public Task<Product> GetProductWithReviews(int id);

@@ -17,5 +17,6 @@ namespace YonoClothesShop.Interfaces
         public Task<List<Supplier>> GetSuppliers();
         public Task<List<SupplierDTO>> GetSuppliersByDeleveriesCount(int min, int? max = null);
         public Task<List<SupplierDTO>> GetSuppliersByTotalDeleveriesPrice(int min, int? max = null);
+        public Task<Supplier> GetSupplierByNameAndCompanyName(string supplierName,string companyName);
     }
 }

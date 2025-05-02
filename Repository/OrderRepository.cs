@@ -40,7 +40,9 @@ namespace YonoClothesShop.Repository
         }
         public async Task<bool> CheckIfOrderExist(int userId, int productId)
         {
-            var isOrderExist = await _dbContext.Orders.AnyAsync(o => o.UserId == userId && o.OrderItems.Any(o => o.ProductId == productId));
+            var isOrderExist = await _dbContext.Orders
+            .AnyAsync(o => o.UserId == userId && o.OrderItems
+            .Any(o => o.ProductId == productId));
 
             if(!isOrderExist)
                 return false;

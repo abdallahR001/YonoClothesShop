@@ -80,6 +80,17 @@ namespace YonoClothesShop.Repository
             ).ToListAsync();
         }
 
+        public async Task<Supplier> GetSupplierByNameAndCompanyName(string supplierName,string companyName)
+        {
+            var supplier = await _dbContext.Suppliers
+            .FirstOrDefaultAsync(s => s.Name.ToLower() == supplierName.ToLower() && s.CompanyName.ToLower() == companyName.ToLower());
+
+            if(supplier == null)
+                return null;
+
+            return supplier;
+        }
+
         public async Task<List<SupplierDTO>> GetSuppliersByTotalDeleveriesPrice(int min, int? max = null)
         {
             var suppliers = _dbContext.Suppliers.Where(s => s.TotalDeleveriesPrice >= min);

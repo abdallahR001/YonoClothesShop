@@ -37,7 +37,7 @@ namespace YonoClothesShop.Repository
 
             if(exsistingProduct == null)
             {
-                await _dbContext.AddAsync(product);
+                await _dbContext.Products.AddAsync(product);
                 return true;
             }
                 
@@ -65,6 +65,14 @@ namespace YonoClothesShop.Repository
             if(product == null)
                 return null;
             
+            return product;
+        }
+
+        public async Task<Product> GetProductByName(string name)
+        {
+            var product = await _dbContext.Products
+            .FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
+
             return product;
         }
 
