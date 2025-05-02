@@ -85,6 +85,7 @@ namespace YonoClothesShop.Services
                 Image = product.Image,
                 Price = product.Price,
                 Count = product.Count,
+                CategoryId = product.CategoryId,
                 SupplierId = product.supplier.Id,
                 SupplierName = product.supplier.Name,
                 SupplierCompany = product.supplier.CompanyName,
@@ -156,10 +157,20 @@ namespace YonoClothesShop.Services
 
         public async Task<bool> Delete(int id)
         {
-            var productIsDeleted = await _unitOfWork.inventoryRepository.DeleteInventoryProduct(id);
+            var inventoryProduct = await _unitOfWork.inventoryRepository.GetInventoryProductById(id);
+
+            if(inventoryProduct == null)
+                return false;
+
+            var product = await _unitOfWork.ProductsRepository.GetProductByName(inventoryProduct.Name);
+
+            var productIsDeleted = await _unitOfWork.inventoryRepository.DeleteInventoryProduct(inventoryProduct.Id);
 
             if(!productIsDeleted)
                 return false;
+
+            if(product != null)
+                await _unitOfWork.ProductsRepository.Delete(product.Id);
 
             await _unitOfWork.SaveChangesAsync();
     
@@ -178,6 +189,7 @@ namespace YonoClothesShop.Services
                 Image = p.Image,
                 Price = p.Price,
                 Count = p.Count,
+                CategoryId = p.CategoryId,
                 SupplierId = p.supplier.Id,
                 SupplierName = p.supplier.Name,
                 SupplierCompany = p.supplier.CompanyName,
@@ -201,6 +213,7 @@ namespace YonoClothesShop.Services
                 Image = p.Image,
                 Price = p.Price,
                 Count = p.Count,
+                CategoryId = p.CategoryId,
                 SupplierId = p.supplier.Id,
                 SupplierName = p.supplier.Name,
                 SupplierCompany = p.supplier.CompanyName,
@@ -224,6 +237,7 @@ namespace YonoClothesShop.Services
                 Image = p.Image,
                 Price = p.Price,
                 Count = p.Count,
+                CategoryId = p.CategoryId,
                 SupplierId = p.supplier.Id,
                 SupplierName = p.supplier.Name,
                 SupplierCompany = p.supplier.CompanyName,
@@ -247,6 +261,7 @@ namespace YonoClothesShop.Services
                 Image = p.Image,
                 Price = p.Price,
                 Count = p.Count,
+                CategoryId = p.CategoryId,
                 SupplierId = p.supplier.Id,
                 SupplierName = p.supplier.Name,
                 SupplierCompany = p.supplier.CompanyName,

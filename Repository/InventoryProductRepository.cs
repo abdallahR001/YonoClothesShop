@@ -64,6 +64,17 @@ namespace YonoClothesShop.Repository
             return inventoryProduct;
         }
 
+        public async Task<Inventory> GetInventoryProductByName(string name)
+        {
+            var inventoryProduct = await _dbContext.InventoryProducts
+            .FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
+
+            if(inventoryProduct == null)
+                return null;
+
+            return inventoryProduct;
+        }
+
         public async Task<bool> UpdateInventoryProduct(int id, Inventory updatedInventoryProduct)
         {
             var inventoryProduct = await _dbContext.InventoryProducts.FindAsync(id);

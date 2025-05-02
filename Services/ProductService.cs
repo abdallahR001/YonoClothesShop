@@ -21,43 +21,32 @@ namespace YonoClothesShop.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> AddProduct(string name, string description, IFormFile image, int price, int count, int categoryId)
+        public async Task<int> AddProduct(int productId, int count)
         {
-            if(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || image.Length == 0 || image == null || price <= 0 || count < 0 || categoryId <= 0)
-                return -2;
+            var inventoryProduct = await _unitOfWork.inventoryRepository.GetInventoryProductById(productId);
 
-            var category = await _unitOfWork.CategoriesRepository.GetCategoryById(categoryId);
-
-            if(category == null)
-                return 0;
+            if(inventoryProduct == null)
+                return -1;
 
             var product = new Product
             {
-                Name = name,
-                Description = description,
-                Price = price,
+                Name = inventoryProduct.Name,
+                Description = inventoryProduct.Description,
+                Price = inventoryProduct.Price,
                 Count = count,
-                CategoryId = categoryId,
-                category = await _unitOfWork.CategoriesRepository.GetCategoryById(categoryId),
+                CategoryId = inventoryProduct.CategoryId,
+                category = await _unitOfWork.CategoriesRepository.GetCategoryById(inventoryProduct.CategoryId),
             };
             var isAdded = await _unitOfWork.ProductsRepository.Add(product);
 
             if(!isAdded)
-                return -1;
+                return -2;
 
+            product.Image = inventoryProduct.Image;
 
-            var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
+            product.category.ProductsCount++;
 
-            var imagePath = Path.Combine("wwwroot/images", fileName);
-
-            using (var stream = new FileStream(imagePath, FileMode.Create))
-            {
-                await image.CopyToAsync(stream);
-            }
-
-            product.Image = fileName;
-
-            category.ProductsCount++;
+            inventoryProduct.Count -= count;
 
             await _unitOfWork.SaveChangesAsync();
 

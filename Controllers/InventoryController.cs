@@ -94,5 +94,15 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = $"product updated successfully"});
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            var isDeleted = await _inventoryService.Delete(id);
+
+            if(!isDeleted)
+                return NotFound(new {message = "product not found"});
+
+            return Ok(new {message = "deleted successfully"});
+        }
     }
 }

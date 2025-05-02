@@ -73,6 +73,10 @@
       "PackagePath": "staticwebassets\\images\\4f2d0e92-a3ae-48d6-be9c-8e4d501eb2d8_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg"
     },
     {
+      "Id": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\4f3bb498-404f-4b99-a947-db3eaa330d31_a sample of my api.png",
+      "PackagePath": "staticwebassets\\images\\4f3bb498-404f-4b99-a947-db3eaa330d31_a sample of my api.png"
+    },
+    {
       "Id": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\501253ed-d7a3-4017-a5b3-2ba96158f8a2_database schema.png",
       "PackagePath": "staticwebassets\\images\\501253ed-d7a3-4017-a5b3-2ba96158f8a2_database schema.png"
     },
@@ -213,12 +217,20 @@
       "PackagePath": "staticwebassets\\images\\f03dfa43-2d98-4cf9-a9d9-6ed299717e0c_myAiImage2.jpg"
     },
     {
+      "Id": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\f079edb1-b11d-419d-b081-830b52f67d0b_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_3.jpg",
+      "PackagePath": "staticwebassets\\images\\f079edb1-b11d-419d-b081-830b52f67d0b_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_3.jpg"
+    },
+    {
       "Id": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\fa231f17-b31f-410e-bf50-f9fd5f57e486_download (1).jpg",
       "PackagePath": "staticwebassets\\images\\fa231f17-b31f-410e-bf50-f9fd5f57e486_download (1).jpg"
     },
     {
       "Id": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\fa88bbbc-c40f-4364-b57e-e7ccd4d86693.jpg",
       "PackagePath": "staticwebassets\\images\\fa88bbbc-c40f-4364-b57e-e7ccd4d86693.jpg"
+    },
+    {
+      "Id": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\fbbb1bae-e8a5-4c4e-9de8-533663ee74cf_a sample of my api.png",
+      "PackagePath": "staticwebassets\\images\\fbbb1bae-e8a5-4c4e-9de8-533663ee74cf_a sample of my api.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.YonoClothesShop.Microsoft.AspNetCore.StaticWebAssets.props",

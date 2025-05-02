@@ -11,6 +11,7 @@ namespace YonoClothesShop.Interfaces
     {
         public Task<List<Inventory>> GetInventories();
         public Task<Inventory> GetInventoryProductById(int id);
+        public Task<Inventory> GetInventoryProductByName(string name);
         public Task<bool> AddInventoryProduct(Inventory inventory);
         public Task<bool> UpdateInventoryProduct(int id, Inventory inventory);
         public Task<bool> DeleteInventoryProduct(int id);

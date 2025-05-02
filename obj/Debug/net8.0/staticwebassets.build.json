@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZDS5mXzOa+8pSlMQJK9peNNDTejVK8HWovGc2g77xHA=",
+  "Hash": "p1WNON91Hna6dn24TY+dtgHbVs4eC5oI2c9A8glF8ag=",
   "Source": "YonoClothesShop",
   "BasePath": "_content/YonoClothesShop",
   "Mode": "Default",
@@ -357,6 +357,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\4f2d0e92-a3ae-48d6-be9c-8e4d501eb2d8_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_2.jpg"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\4f3bb498-404f-4b99-a947-db3eaa330d31_a sample of my api.png",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/4f3bb498-404f-4b99-a947-db3eaa330d31_a sample of my api.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\4f3bb498-404f-4b99-a947-db3eaa330d31_a sample of my api.png"
     },
     {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\501253ed-d7a3-4017-a5b3-2ba96158f8a2_database schema.png",
@@ -1024,6 +1043,25 @@
       "OriginalItemSpec": "wwwroot\\images\\f03dfa43-2d98-4cf9-a9d9-6ed299717e0c_myAiImage2.jpg"
     },
     {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\f079edb1-b11d-419d-b081-830b52f67d0b_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_3.jpg",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/f079edb1-b11d-419d-b081-830b52f67d0b_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\f079edb1-b11d-419d-b081-830b52f67d0b_Leonardo_Phoenix_10_I_want_an_image_resembling_the_thumbnail_f_3.jpg"
+    },
+    {
       "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\fa231f17-b31f-410e-bf50-f9fd5f57e486_download (1).jpg",
       "SourceId": "YonoClothesShop",
       "SourceType": "Discovered",
@@ -1060,6 +1098,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\fa88bbbc-c40f-4364-b57e-e7ccd4d86693.jpg"
+    },
+    {
+      "Identity": "D:\\.net\\YonoClothesShop\\wwwroot\\images\\fbbb1bae-e8a5-4c4e-9de8-533663ee74cf_a sample of my api.png",
+      "SourceId": "YonoClothesShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.net\\YonoClothesShop\\wwwroot\\",
+      "BasePath": "_content/YonoClothesShop",
+      "RelativePath": "images/fbbb1bae-e8a5-4c4e-9de8-533663ee74cf_a sample of my api.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\fbbb1bae-e8a5-4c4e-9de8-533663ee74cf_a sample of my api.png"
     }
   ]
 }
