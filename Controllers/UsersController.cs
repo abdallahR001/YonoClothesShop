@@ -79,6 +79,21 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "account deleted successfully"});
         }
+        [HttpGet("orders"),Authorize]
+        public async Task<ActionResult<List<OrderDTO>>> GetOrders()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if(!int.TryParse(userId, out int id))
+                return Forbid();
+
+            var orders = await _userService.GetOrders(id);
+
+            if(!orders.Any())
+                return NotFound(new {message = "no orders yet"});
+
+            return Ok(orders);
+        } 
         [HttpPost("deposit"),Authorize]
         public async Task<ActionResult> Deposit(DepositModel request)
         {

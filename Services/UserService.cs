@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.Identity.Client;
+using Microsoft.VisualBasic;
 using YonoClothesShop.DTOs;
 using YonoClothesShop.Interfaces;
 using YonoClothesShop.Models;
@@ -107,6 +108,37 @@ namespace YonoClothesShop.Services
                 OrdersCount = user.OrdersCount,
                 ProfileImage = user.ProfileImage
             };
+        }
+
+        public async Task<List<OrderDTO>> GetOrders(int id)
+        {
+            var orders = await _unitOfWork.UsersRepository.GetOrders(id);
+
+            if(orders == null)
+                return null;
+
+            return orders.Select(o => new OrderDTO
+            {
+                Id = o.Id,
+                UserId = o.UserId,
+                TotalPrice = o.TotalPrice,
+                Address = o.Address,
+                CreatedAt = o.CreatedAt,
+                ProductsCount = o.ProductsCount,
+                Status = o.Status,
+                PaymentMethod = o.PaymentMethod,
+                OrderItems = o.OrderItems.Select(o => new OrderItemDTO
+                {
+                    Id = o.Id,
+                    ProductId = o.ProductId,
+                    Name = o.Name,
+                    Quantity = o.Quantity,
+                    UnitPrice = o.UnitPrice,
+                    ProductImage = o.ProductImage,
+                }
+                ).ToList()
+            }
+            ).ToList();
         }
 
         public async Task<bool> UpdateAccount(int id,string name = null, string address = null, IFormFile profileImage = null)

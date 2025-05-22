@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using YonoClothesShop.DTOs;
@@ -20,7 +21,7 @@ namespace YonoClothesShop.Controllers
         {
             _inventoryService = inventoryService;
         }
-        [HttpGet("")]
+        [HttpGet(""),Authorize(Roles = "admin")]
         public async Task<ActionResult<List<InventoryDTO>>> GetInventoryProducts()
         {
             return Ok(await _inventoryService.GetProducts());
@@ -35,7 +36,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(product);
         }
-        [HttpGet("category/{categoryId}")]
+        [HttpGet("category/{categoryId}"),Authorize(Roles = "admin")]
         public async Task<ActionResult<InventoryDTO>> GetProductsByCategory(int categoryId)
         {
             var products = await _inventoryService.GetProductsByCategory(categoryId);
@@ -45,7 +46,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(products);
         }
-        [HttpGet("search/{name}")]
+        [HttpGet("search/{name}"),Authorize(Roles = "admin")]
         public async Task<ActionResult<InventoryDTO>> GetProductsByName(string name)
         {
             var products = await _inventoryService.GetProductsByName(name);
@@ -55,7 +56,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(products);
         }
-        [HttpGet("filter/{categoryId}")]
+        [HttpGet("filter/{categoryId}"),Authorize(Roles = "admin")]
         public async Task<ActionResult<InventoryDTO>> GetProductsByCategory(int categoryId,[FromQuery] int minPrice, [FromQuery] int? maxPrice = null)
         {
             var products = await _inventoryService.GetProductsFiltredByPrice(categoryId,minPrice,maxPrice);
@@ -65,7 +66,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(products);
         }
-        [HttpPost("{categoryId}")]
+        [HttpPost("{categoryId}"),Authorize(Roles = "admin")]
         public async Task<ActionResult> AddProduct(int categoryId,AddInventoryProductModel request)
         {
             var isAdded = await _inventoryService.AddProduct(request.Name,request.Description,request.Image,request.Price,request.SupplierPrice,request.Count,categoryId,request.SupplierName,request.SupplierCompany);
@@ -84,7 +85,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = $"product {request.Name} added successfully"});
         }
-        [HttpPut("{productId}")]
+        [HttpPut("{productId}"),Authorize(Roles = "admin")]
         public async Task<ActionResult> UpdateProduct(int productId,UpdateInventoryProductModel request)
         {
             var isUpdated = await _inventoryService.UpdateProduct(productId,request.Name,request.Description,request.Image,request.Price,request.Count);
@@ -94,7 +95,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = $"product updated successfully"});
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"),Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var isDeleted = await _inventoryService.Delete(id);

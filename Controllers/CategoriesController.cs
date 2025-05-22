@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using YonoClothesShop.DTOs;
@@ -23,14 +24,14 @@ namespace YonoClothesShop.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet("")]
+        [HttpGet(""),Authorize(Roles = "admin")]
         public async Task<ActionResult<List<CategoryDTO>>> GetCategories()
         {
             var categories = await _categoryService.GetCategories();
 
             return Ok(categories);
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}"),Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryDTO>> GetCategory(int id)
         {
             var category = await _categoryService.GetCategory(id);
@@ -41,7 +42,7 @@ namespace YonoClothesShop.Controllers
             return Ok(category);
 
         }
-        [HttpGet("name")]
+        [HttpGet("name"),Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryDTO>> GetCategoryByName([FromQuery] string name)
         {
             var category = await _categoryService.GetByName(name);
@@ -51,7 +52,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(category);
         }
-        [HttpPost("")]
+        [HttpPost(""),Authorize(Roles = "admin")]
         public async Task<ActionResult> AddCategory(AddCategoryModel request)
         {
             if(!ModelState.IsValid)
@@ -64,7 +65,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "added successfully"});
         }
-        [HttpPut("{categoryId}")]
+        [HttpPut("{categoryId}"),Authorize(Roles = "admin")]
         public async Task<ActionResult> UpdateCategory(int categoryId,UpdateCategoryModel request)
         {
             var isUpdated = await _categoryService.UpdateCategory(categoryId,request.Name,request.Image);
@@ -74,7 +75,7 @@ namespace YonoClothesShop.Controllers
 
             return Ok(new {message = "updated successfully"});
         }
-        [HttpDelete("{categoryId}")]
+        [HttpDelete("{categoryId}"),Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteCategory(int categoryId)
         {
             var isDeleted = await _categoryService.DeleteCategory(categoryId);

@@ -18,7 +18,6 @@ namespace YonoClothesShop.Models
         public string? Description { get; set; }
         public string? Image { get; set; }
         public int CategoryId { get; set; }
-        [JsonIgnore]
         public Category? category { get; set; }
         public List<Review>? reviews { get; set; } = new();
         public int Price { get; set; }

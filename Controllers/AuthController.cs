@@ -28,6 +28,20 @@ namespace YonoClothesShop.Controllers
             return Ok(token);
         }
 
+        [HttpPost("admin")]
+        public async Task<ActionResult<Token>> LoginAsAdmin(LoginModel request)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(new {message = "invalid credintials"});
+
+            var token = await _authService.LoginAsAdmin(request.Email,request.Password);
+
+            if(token == null)
+                return BadRequest(new {message = "invalid credintials"});
+
+            return Ok(token);
+        }
+
         [HttpDelete(""),Authorize]
         public async Task<ActionResult> LogOut()
         {
@@ -44,7 +58,7 @@ namespace YonoClothesShop.Controllers
             return NotFound(new {message = "user or token not found"});
         }
 
-        [HttpGet("refresh-token"),Authorize]
+        [HttpGet("refresh-token"),Authorize(Roles = "admin,user")]
         public async Task<ActionResult> RefreshToken([FromHeader] string refreshToken)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

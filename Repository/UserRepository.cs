@@ -31,6 +31,20 @@ namespace YonoClothesShop.Repository
             return user;
         }
 
+        public async Task<List<Order>> GetOrders(int id)
+        {
+            var orders = await _dbContext.Orders
+            .AsNoTracking()
+            .Include(o => o.OrderItems)
+            .Where(o => o.UserId == id)
+            .ToListAsync();
+
+            if(!orders.Any())
+                return null;
+
+            return orders;
+        }
+
         public async Task<List<User>> GetByFilter(Expression<Func<User, bool>> filter)
         {
             return await _dbContext.Users.Where(filter).ToListAsync();

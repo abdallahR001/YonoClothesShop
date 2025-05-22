@@ -69,6 +69,59 @@ namespace YonoClothesShop.Services
             return authResponse;
         }
 
+        public async Task<Token> LoginAsAdmin(string email, string password)
+        {
+            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                return null;
+
+            var user = await _unitOfWork.AdminRepository.GetByEmail(email);
+
+            if(user == null)
+                return null;
+
+            var isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password,user.Password);
+
+            if(!isPasswordCorrect)
+                return null;
+
+            var accessToken = AdminTokenGenerator.GenerateToken(user.Id,email,_configuration);
+
+            var refreshToken = AdminTokenGenerator.GenerateRefreshToken();
+
+            var existingToken = await _unitOfWork.TokensRepository.Tokens
+            .FirstOrDefaultAsync(t => t.UserId == user.Id);
+            if(existingToken != null)
+            {
+                existingToken.AccessToken = accessToken;
+
+                existingToken.RefreshToken = refreshToken;
+
+                existingToken.AccessTokenExpiration = DateTime.UtcNow
+                .AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationInMinutes"]));
+
+                existingToken.RefreshTokenExpiration = DateTime.UtcNow
+                .AddDays(5);
+
+                await _unitOfWork.SaveChangesAsync();
+
+                return existingToken;
+            }
+            var authResponse = new Token
+            {
+                UserId = user.Id,
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+                AccessTokenExpiration = DateTime.UtcNow
+                .AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationInMinutes"])),
+                RefreshTokenExpiration = DateTime.UtcNow.AddDays(5)
+            };
+
+            await _unitOfWork.TokensRepository.Add(authResponse);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return authResponse;
+        }
         public async Task<bool> LogOut(int id)
         {
             var user = await _unitOfWork.UsersRepository.GetById(id);

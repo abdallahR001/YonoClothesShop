@@ -14,6 +14,7 @@ namespace YonoClothesShop.Interfaces
         public Task<UserDTO> GetAccount(int id);
         public Task<bool> UpdateAccount(int id, string name = null, string address = null, IFormFile profileImage = null);
         public Task<bool> DeleteAccount(int id);
+        public Task<List<OrderDTO>> GetOrders(int id);
         public Task<bool> Deposit(int id, int amount);
         
     }

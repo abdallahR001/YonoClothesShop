@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YonoClothesShop.Data;
 
@@ -11,9 +12,11 @@ using YonoClothesShop.Data;
 namespace YonoClothesShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250505222421_addAdminsTable")]
+    partial class addAdminsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Admins", (string)null);
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Cart", b =>
@@ -60,7 +63,7 @@ namespace YonoClothesShop.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.CartItem", b =>
@@ -93,7 +96,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Category", b =>
@@ -117,7 +120,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Inventory", b =>
@@ -164,7 +167,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("InventoryProducts", (string)null);
+                    b.ToTable("InventoryProducts");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Order", b =>
@@ -198,7 +201,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.OrderItem", b =>
@@ -231,7 +234,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Product", b =>
@@ -268,7 +271,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.RefreshToken", b =>
@@ -292,7 +295,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens", (string)null);
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Review", b =>
@@ -323,7 +326,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Supplier", b =>
@@ -351,7 +354,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers", (string)null);
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Token", b =>
@@ -379,7 +382,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tokens", (string)null);
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.User", b =>
@@ -421,7 +424,7 @@ namespace YonoClothesShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("YonoClothesShop.Models.Cart", b =>
